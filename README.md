@@ -10,7 +10,7 @@ I wanted to put the Arduino VENTUNO Q on wheels. The board pairs a Qualcomm Drag
 
 Blackjack is that platform, and this repository is the engineering record of how it gets made: the design, the studies, the decisions and, as they arrive, the drawings and the code.
 
-> **Status: design stage.** What you see here are renderings of the CAD model. No part has been cut and no hardware has been assembled yet. This page says what exists today, and it will keep saying so as things change.
+**Where the build is.** The cover and the antenna plate are modelled in CAD, the power architecture is decided, and the first set of sheet-metal parts is the next step. The [architecture table](#architecture) tracks the state of every block.
 
 ## Why this combination
 
@@ -112,11 +112,11 @@ Referring my work to recognised standards is a habit I bring from my profession,
 | Studies and reports | numbered sections and figures, references in IEEE style, sources archived with checksum |
 | Guides and documentation | Diataxis, GitHub Flavored Markdown |
 
-Most of these lines describe work that is still ahead: the table is the commitment, and each release will say which rows it was checked against.
+The table is the commitment: each release states which rows it was checked against.
 
 ## What is in this repository
 
-Today: this page and its images. Next, as each one passes review:
+Published so far: this page. Coming, as each one passes review:
 
 - the power supply study, with its sources
 - flat patterns and drawings of the sheet-metal parts
