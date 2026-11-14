@@ -32,7 +32,7 @@ Licence: CC BY 4.0. Credit: Blackjack Rover by Alessandro Pistella, github.com/a
 
 **Why.** The board accepts the 3S battery voltage directly on its barrel jack, so no converter is needed. Taking the supply after the rover switch gives a single switch without any added electronics. The trade-off is stated in the study: the board current passes through the battery module, whose shunt sets the continuous current.
 
-**Record.** [Power supply study BJ-STU-001](../studies/BJ-STU-001_power_supply_study.md): sections 4.6 (power inputs of the board), 4.9 (the rover switch), 5 (current budget), 6 (what the findings allow), 7 (to verify on hardware), 10 (ratings of the chosen parts). Decision D-079, 14 November 2026.
+**Record.** [Power supply study BJ-STU-001](../studies/BJ-STU-001_power_supply_study.md): sections 4.6 (power inputs of the board), 4.9 (the rover switch), 5 (current budget), 6 (what the findings allow), 7 (bench test plan), 9 (ratings of the chosen parts). Decision D-079, 14 November 2026.
 
 ## Cooling by design
 

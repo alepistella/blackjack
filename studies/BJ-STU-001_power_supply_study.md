@@ -11,7 +11,6 @@
 | Prepared by | Alessandro Pistella, with AI agents working under written rules, on the archived schematics and on the CAD model |
 | Licence | CC BY 4.0, credit: Blackjack Rover by Alessandro Pistella, github.com/alepistella/blackjack |
 | Measurement records | RIL-004, RIL-011, RIL-057, RIL-072, RIL-073, RIL-074 |
-| Open issues touched | OI-01, OI-59, OI-63, OI-66, OI-68, OI-69 |
 
 This study is built on the published schematics and data sheets of the parts and on measurements taken on the CAD model. Every statement is traced to its source.
 
@@ -33,9 +32,9 @@ This study is built on the published schematics and data sheets of the parts and
    - 4.10 [Battery bay](#410-battery-bay)
 5. [Current budget](#5-current-budget)
 6. [What the findings allow](#6-what-the-findings-allow)
-7. [To verify on hardware](#7-to-verify-on-hardware)
-8. [Corrections to earlier records](#8-corrections-to-earlier-records)
-9. [Note on third-party images](#9-note-on-third-party-images)
+7. [Bench test plan](#7-bench-test-plan)
+8. [Note on third-party images](#8-note-on-third-party-images)
+9. [Decision, ratings of the chosen parts, plug](#9-decision-ratings-of-the-chosen-parts-plug)
 
 ## 1. Purpose and questions
 
@@ -199,7 +198,7 @@ Not specified. The datasheet gives no figure for the board with the disable pin 
 
 What the schematic shows: with the pin low the converters of the system-on-module are disabled, but the input power switch, the resistor dividers on the input and the USB-C controller stay supplied. SRC-01: the CYPD6129 "remains always powered via a dedicated buck converter (LMR51440) supplied from any connected power source".
 
-Answer to question 5, second part: the board has no documented true power-off while a supply is connected. The residual current must be measured before the board is left connected to a battery upstream of the rover switch (OI-68).
+Answer to question 5, second part: the board has no documented true power-off while a supply is connected. The residual current must be measured before the board is left connected to a battery upstream of the rover switch.
 
 ### 4.9 The rover switch
 
@@ -207,7 +206,7 @@ From SRC-30 (figure 2): connector P4 "SWITCH" has pin 2 on the gate of M3 and pi
 
 M3 feeds net VBAT, and VBAT feeds both the battery-voltage output P3 and the 5 V converter. With the switch open everything downstream of the pack is off. There is no output upstream of the switch.
 
-The switch on the deck is named "自锁开关" (self-locking switch) in the Waveshare CAD model, and the kit of the retail module lists a "self lock button switch". By the documents it is a latching switch, not a momentary one. To confirm on the part (OI-69).
+The switch on the deck is named "自锁开关" (self-locking switch) in the Waveshare CAD model, and the kit of the retail module lists a "self lock button switch". By the documents it is a latching switch, not a momentary one. To confirm on the part.
 
 Answer to question 4, second part: the signal of the rover switch is not directly compatible with the disable pin of the VENTUNO Q, for two reasons:
 
@@ -258,7 +257,7 @@ Battery-side current of the VENTUNO Q fed directly at bus voltage (power divided
 
 For comparison, the stock host supply: 5 V at 5 A is 25 W at the output of the converter, which is at least 1.98 A at 12.6 V and at least 2.78 A at 9.0 V on the battery side, before the losses of the converter.
 
-The rover's own current (four motors, driver board, servos, lights) is not in any archived source as a measured figure: OI-01 stays open.
+The rover's own current (four motors, driver board, servos, lights) is not in any archived source as a measured figure.
 
 Reading: the peak of the VENTUNO Q is of the same class as the peak that Waveshare already draws for a Raspberry Pi 5 through the same battery module. The averages are about half of the peaks.
 
@@ -272,38 +271,32 @@ This section lists what becomes possible. It does not choose.
 4. Autonomy is a separate question from the power path. With the stock module removed there is room for four times the cells (section 4.10). A larger pack needs its own protection, balancing, switch stage and current measurement, and keeps the same 12.6 V adapter.
 5. The VENTUNO Q measures its own input current (INA232), and the driver board measures its own (INA219 at 0x42). Both branches can be monitored without added parts, whichever battery is used.
 
-## 7. To verify on hardware
+## 7. Bench test plan
 
-| Item | What to check | Record |
-|---|---|---|
-| Battery module identity | part marking, connectors P1..P4, value and size of the shunt | RIL-057, OI-59 |
-| Deck switch | latching or momentary, contacts, hole size | OI-69 |
-| Rover current | at rest, driving, stalled, at 9 V and at 12.6 V | OI-01, OI-63 |
-| VENTUNO Q current | boot, inference, peaks, on the 3S bus | OI-63 |
-| VENTUNO Q residual current | disable pin low; after a 10 s press; after a shutdown from Linux | OI-68 |
-| Charge | adapter label (voltage, current), temperature of the module while charging | - |
-| Driver board switch | the wiki lists an on-board switch for the external supply: what it switches | - |
-| Battery bay | real free dimensions with the stock wiring | RIL-073 |
+| Item | What is measured |
+|---|---|
+| Battery module identity | part marking, connectors P1..P4, value and size of the shunt |
+| Deck switch | latching or momentary, contacts, hole size |
+| Rover current | at rest, driving, stalled, at 9 V and at 12.6 V |
+| VENTUNO Q current | boot, inference, peaks, on the 3S bus |
+| VENTUNO Q residual current | disable pin low; after a 10 s press; after a shutdown from Linux |
+| Charge | adapter label (voltage, current), temperature of the module while charging |
+| Driver board switch | the wiki lists an on-board switch for the external supply: what it switches |
+| Battery bay | real free dimensions with the stock wiring |
 
-## 8. Corrections to earlier records
-
-- RIL-004 and OI-66 stated that the barrel jack of the VENTUNO Q needs 12 V and therefore a step-up converter on a 3S battery. That was a wrong reading of the ratings table: the jack and the screw terminal are one net, and the 12 V figure is a power rule for the 5 A contact (section 4.6). Corrected on 14 November 2026.
-- RIL-071 studied a USB-C Power Delivery source as a way to avoid loose wires in the screw terminal. With the barrel jack valid, that route is no longer needed for that purpose.
-- An earlier chat statement gave the battery-side peak of the board as 4.1 A at 9 V. That figure included a converter with 90% efficiency. Fed directly, the peak is 3.67 A at 9.0 V (section 5).
-
-## 9. Note on third-party images
+## 8. Note on third-party images
 
 Figures 1, 2, 3, 5, 6 and 7 are excerpts of schematics published by Waveshare and by Arduino; figures 4 and 8 are frames of a Waveshare video. They are not reproduced in this public edition: each caption names the document, the sheet and the nets, so that the reader can open the original. Figures 9 and 10 are our own.
 
-## 10. Rev B (2026-11-14): decision, component data from archived data sheets, plug
+## 9. Decision, ratings of the chosen parts, plug
 
 Every value below is copied from a data sheet kept in the project archive with its SHA-256. The data sheets belong to their manufacturers; they are cited here, not reproduced. Record: RIL-075.
 
-### 10.1 Decision
+### 9.1 Decision
 
 D-079 (Alessandro): stock battery module, VENTUNO Q fed through barrel jack J5 with a 90 degree plug, power taken from the switched rail (output P3), one switch for the whole robot.
 
-### 10.2 Ratings
+### 9.2 Ratings
 
 | Part | Where | Value | Source |
 |---|---|---|---|
@@ -318,22 +311,16 @@ D-079 (Alessandro): stock battery module, VENTUNO Q fed through barrel jack J5 w
 | Tensility 10-01780 | 90 degree plug with cable | 48 V, 8.5 A, 2 x 18 AWG, head dia 11 x 11.9 mm | SRC-45, Tensility |
 | Schurter 4840.5201 | counter-example of an angled plug | 0.5 A, 12 V, 2 x 0.3 mm2 | SRC-47, Schurter |
 
-This corrects section 8 of rev A where these ratings were flagged "not archived".
-
-### 10.3 What the ratings say about the decision
+### 9.3 What the ratings say about the decision
 
 - The weakest element of the chosen path is the XH contact of P3: 3 A, against 2.62 A (12.6 V) to 3.67 A (9.0 V) for the VENTUNO Q alone at its measured peak of 33.0 W, plus the rover. The MOSFET switch has a wide margin (12 A). The limit is the connector and the 0.1 Ohm shunt, not the switch.
 - The plug must be chosen on its rating: 8.5 A for the Tensility part, 0.5 A for an apparently identical Schurter part.
 - A full 3S pack is 0.9 V below the maximum operating voltage of the motor drivers: nothing above 3S on this rail.
 
-### 10.4 Plug in the model
+### 9.4 Plug in the model
 
 ![W03 with the 90 degree plug behind the rear wall](img/BJ-STU-001/fig10_barrel_plug_90deg.png)
 
 Figure 10: own work, screenshot of the Fusion model "Blackjack_B", 14 November 2026. The plug is redrawn from the dimensions of Tensility drawing 10-01780 (SRC-45).
 
-No interference. Plug head to the WiFi antenna of the UGV02: 1.32 mm; to the edge of the cover opening: 0.50 mm (OI-70). The cable cannot leave downwards (strain relief 25 mm, jack axis 20.2 mm above the deck): it leaves sideways behind the rear wall.
-
-### 10.5 Still to verify on hardware
-
-OI-63 (currents on P3), OI-70 (plug clearance), OI-68 (consumption when off), OI-69 (switch type), OI-59 (position of P3), polarity of J5 on the schematic before wiring.
+No interference. Plug head to the WiFi antenna of the UGV02: 1.32 mm; to the edge of the cover opening: 0.50 mm. The cable cannot leave downwards (strain relief 25 mm, jack axis 20.2 mm above the deck): it leaves sideways behind the rear wall.
