@@ -2,11 +2,11 @@
   <img src="docs/images/blackjack_render_assembled.jpg" alt="Rendering of the Blackjack Rover: a six-wheel chassis with a black bent sheet-metal cover and a pan-tilt camera on the roof" width="100%">
 </p>
 
-# Blackjack
+# Blackjack Rover
 
-**A rover platform for the Arduino VENTUNO Q, built on a stock Waveshare UGV02 chassis, and engineered in the open.**
+**An open ROS 2 rover platform for the Arduino VENTUNO Q and its Qualcomm Dragonwing IQ8 processor, built on a stock Waveshare UGV02 chassis and engineered in the open.**
 
-I wanted to put the Arduino VENTUNO Q on wheels. The board pairs a Qualcomm Dragonwing processor with an STM32 microcontroller: one side for perception, navigation and AI, the other for real-time control. I looked for a platform to carry it and found none that really convinced me. So I am building one.
+I wanted to put the Arduino VENTUNO Q on wheels. The board pairs a Qualcomm Dragonwing IQ8 (QCS8275) processor running Linux with an STMicroelectronics STM32H5 microcontroller: one side for perception, navigation and edge AI, the other for real-time control. I looked for a platform to carry it and found none that really convinced me. So I am building one.
 
 Blackjack is that platform, and this repository is the engineering record of how it gets made: the design, the studies, the decisions and, as they arrive, the drawings and the code.
 
@@ -14,7 +14,7 @@ Blackjack is that platform, and this repository is the engineering record of how
 
 ## Why this combination
 
-**Arduino VENTUNO Q.** Two processors on one board is the interesting part for a mobile robot: the Linux side is meant to run ROS 2 and the vision workload, the microcontroller side is there for hard real-time work. Blackjack is designed to use both: first the standard ROS 2 tools, then a study on moving motor control to the microcontroller.
+**Arduino VENTUNO Q, with Qualcomm Dragonwing inside.** Two processors on one board is the interesting part for a mobile robot: the Qualcomm Dragonwing IQ8 side runs Linux and is meant to carry ROS 2, the vision workload and on-device AI, the STM32 side is there for hard real-time work. Blackjack is designed to use both: first the standard ROS 2 tools, then a study on moving motor control to the microcontroller.
 
 **Waveshare UGV02.** A compact metal chassis with six wheels, four of them driven, its own driver board and a 3S battery module, sold with official CAD models and documentation. It is a solid, well documented base. Blackjack does not modify it: the kit is designed to bolt to the holes that are already in the deck.
 
@@ -136,6 +136,6 @@ If you use or show this work, please credit: *Blackjack Rover by Alessandro Pist
 
 Code is released under the Apache License 2.0; documents, drawings, flat patterns, studies and diagrams under Creative Commons Attribution 4.0; renderings and videos remain all rights reserved. In every case the condition is the credit above. Details in [LICENSING.md](LICENSING.md).
 
-Arduino, VENTUNO, Qualcomm, Dragonwing and Waveshare are trademarks of their respective owners. This is an independent project, not affiliated with or endorsed by any of them. Their products are named here only to say what Blackjack is built for.
+Arduino, VENTUNO, Qualcomm, Dragonwing, STM32, ROS and Waveshare are trademarks of their respective owners. This is an independent project, not affiliated with or endorsed by any of them. Their products are named here only to say what Blackjack is built for.
 
 *Keep the smoke in, and have fun.*
