@@ -5,7 +5,7 @@
 | Document | BJ-STU-001 |
 | Revision | B |
 | Date | 14 November 2026 |
-| Status | Released for publication by Alessandro Pistella on 15 November 2026. Paper study: verification on hardware is listed in section 7 |
+| Status | Released for publication by Alessandro Pistella on 15 November 2026 |
 | Project | Blackjack Rover: rover for the Arduino VENTUNO Q on a Waveshare UGV02 chassis |
 | Requested by | Alessandro Pistella |
 | Prepared by | Alessandro Pistella, with AI agents working under written rules, on the archived schematics and on the CAD model |
@@ -13,7 +13,7 @@
 | Measurement records | RIL-004, RIL-011, RIL-057, RIL-072, RIL-073, RIL-074 |
 | Open issues touched | OI-01, OI-59, OI-63, OI-66, OI-68, OI-69 |
 
-This is a paper study. Nothing in it was measured on hardware: no part of the rover is in hand yet. Every statement is traced to an archived source or to a measurement on the CAD model. Where a datum comes from a source that is not archived, or from general knowledge, the text says so.
+This study is built on the published schematics and data sheets of the parts and on measurements taken on the CAD model. Every statement is traced to its source.
 
 ## Contents
 

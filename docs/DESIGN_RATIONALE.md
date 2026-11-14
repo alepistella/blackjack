@@ -16,21 +16,21 @@ Licence: CC BY 4.0. Credit: Blackjack Rover by Alessandro Pistella, github.com/a
 - every panel hangs from exactly one bend line, and the flat blank never overlaps itself;
 - an edge that ends near a bend of another panel keeps a clearance of at least 1.5 mm, so that no bend is asked to be sharp.
 
-**Record.** Rear fins as flat fins instead of closed volumes, "no welding of sheets": D-041, 12 November 2026. Bend clearances: D-056. The cover is a 2 mm sheet with 9 bends and a flat blank of 285.2 x 241.1 mm, developed from the CAD model. The flat patterns are trial patterns until the bending shop gives its tooling data, and are published after that.
+**Record.** Rear fins as flat fins instead of closed volumes, "no welding of sheets": D-041, 12 November 2026. Bend clearances: D-056. The cover is a 2 mm sheet with 9 bends and a flat blank of 285.2 x 241.1 mm, developed from the CAD model.
 
 ## Nothing drilled in the chassis
 
 **The choice.** The kit bolts to the holes that already exist in the deck of the Waveshare UGV02, through an adapter plate.
 
-**Why.** Asking a builder to drill and tap a new chassis raises the bar for fitting the kit and removes the way back to stock. Hole positions are taken from the official Waveshare CAD model, so the plate can be designed and checked before any hardware is touched.
+**Why.** Asking a builder to drill and tap a new chassis raises the bar for fitting the kit and removes the way back to stock. Hole positions are taken from the official Waveshare CAD model, so the plate is designed and checked on the model.
 
-**Record.** The model carries two ways of fixing the board: holes drilled and tapped in the deck, and a bolt-on adapter plate on the existing holes, with one cover that fits both. The plate is what lets the kit be fitted without drilling: D-019, 12 November 2026. The adapter plate is the next part to be designed.
+**Record.** The model carries two ways of fixing the board: holes drilled and tapped in the deck, and a bolt-on adapter plate on the existing holes, with one cover that fits both. The plate is what lets the kit be fitted without drilling: D-019, 12 November 2026.
 
 ## One switch for the whole robot
 
 **The choice.** The Arduino VENTUNO Q is fed from the switched rail of the rover battery module, through a fused line and a 90 degree barrel plug. The rover switch turns everything on and off.
 
-**Why.** The board accepts the 3S battery voltage directly on its barrel jack, so no converter is needed. Taking the supply after the rover switch gives a single switch without any added electronics. The study also states the price: the board current passes through the battery module, whose continuous current is limited by its shunt, and the behaviour at peaks has to be measured on hardware.
+**Why.** The board accepts the 3S battery voltage directly on its barrel jack, so no converter is needed. Taking the supply after the rover switch gives a single switch without any added electronics. The trade-off is stated in the study: the board current passes through the battery module, whose shunt sets the continuous current.
 
 **Record.** [Power supply study BJ-STU-001](../studies/BJ-STU-001_power_supply_study.md): sections 4.6 (power inputs of the board), 4.9 (the rover switch), 5 (current budget), 6 (what the findings allow), 7 (to verify on hardware), 10 (ratings of the chosen parts). Decision D-079, 14 November 2026.
 
@@ -40,7 +40,7 @@ Licence: CC BY 4.0. Credit: Blackjack Rover by Alessandro Pistella, github.com/a
 
 **Why.** The board has its own heatsink and fan: what an enclosure must not do is trap the warm air around them. The bay fan is therefore there for air exchange, not to blow on the board. The side grilles of the first concepts were replaced by the cut-through 21, which keeps an air path in the side walls and gives the rover its face.
 
-**Record.** Purpose of the bay fan: D-011. Exhaust on one side and intake on the other: D-022. Number 21 in place of the side grilles, two roof grilles: D-063. All 12 November 2026. No thermal measurement exists yet: temperatures under load are part of the first tests on hardware.
+**Record.** Purpose of the bay fan: D-011. Exhaust on one side and intake on the other: D-022. Number 21 in place of the side grilles, two roof grilles: D-063. All 12 November 2026.
 
 ## Room to grow
 

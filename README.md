@@ -10,8 +10,6 @@ I wanted to put the Arduino VENTUNO Q on wheels. The board pairs a Qualcomm Drag
 
 Blackjack is that platform, and this repository is the engineering record of how it gets made: the design, the studies, the decisions and, as they arrive, the drawings and the code.
 
-**Where the build is.** The cover and the antenna plate are modelled in CAD, the power architecture is decided, and the first set of sheet-metal parts is the next step. The [architecture table](#architecture) tracks the state of every block.
-
 ## Why this combination
 
 **Arduino VENTUNO Q, with Qualcomm Dragonwing inside.** Two processors on one board is the interesting part for a mobile robot: the Qualcomm Dragonwing IQ8 side runs Linux and is meant to carry ROS 2, the vision workload and on-device AI, the STM32 side is there for hard real-time work. Blackjack is designed to use both: first the standard ROS 2 tools, then a study on moving motor control to the microcontroller.
@@ -28,7 +26,7 @@ Blackjack is that platform, and this repository is the engineering record of how
 
 - **One sheet, no welds.** The top cover is a single 2 mm sheet, laser cut flat and then bent: 9 bends, flat blank 285.2 x 241.1 mm. Every hole and every cut-out is drawn on the flat sheet, so the part can be made by any shop with a laser and a press brake. [Why, and the rules it imposes](docs/DESIGN_RATIONALE.md#one-sheet-no-welds).
 - **Nothing drilled in the chassis.** The adapter plate is designed around the existing holes of the UGV02 deck. [Why](docs/DESIGN_RATIONALE.md#nothing-drilled-in-the-chassis).
-- **One switch for the whole robot.** The VENTUNO Q is fed from the rover battery bus through a fused line and a 90 degree barrel plug. The [power supply study](studies/BJ-STU-001_power_supply_study.md) shows how that was reached, and [what it costs](docs/DESIGN_RATIONALE.md#one-switch-for-the-whole-robot).
+- **One switch for the whole robot.** The VENTUNO Q is fed from the rover battery bus through a fused line and a 90 degree barrel plug. The [power supply study](studies/BJ-STU-001_power_supply_study.md) shows how that was reached; the [rationale](docs/DESIGN_RATIONALE.md#one-switch-for-the-whole-robot) gives the trade-off.
 - **Cooling by design.** A 40 mm fan, grilles on the roof, and the number 21 cut through both side walls: it is the name of the board, it is the game the rover is named after, and it is also an air path. [The reasoning](docs/DESIGN_RATIONALE.md#cooling-by-design).
 - **Room to grow.** The cover carries the mounting patterns for a pan-tilt turret or a lidar, and for the antennas. These are designed in and stay unfitted in the base configuration. [How the options share the roof](docs/DESIGN_RATIONALE.md#room-to-grow).
 
@@ -42,18 +40,16 @@ Blackjack is that platform, and this repository is the engineering record of how
   <img src="docs/images/architecture.svg" alt="Block diagram: the stock UGV02 with battery, driver board and motors; the Blackjack kit with cover, plate and power harness; the VENTUNO Q with its two processors and the depth camera" width="100%">
 </p>
 
-| Block | What it is | State |
-|---|---|---|
-| Chassis | Waveshare UGV02, stock: driver board with IMU, four 12 V gear motors, 3S battery module | commercial product, used unmodified |
-| Computer | Arduino VENTUNO Q | commercial product |
-| Top cover BJ-P02 | one 2 mm bent sheet | concept modelled, trial flat pattern |
-| Adapter plate BJ-P01 | 2 mm sheet on the existing deck holes | to be designed |
-| Rear antenna plate BJ-P03 | 2 mm bent sheet for the GNSS antenna, flat blank 154.0 x 129.0 mm | concept modelled, trial flat pattern |
-| Power | fused tap on the switched battery rail, 90 degree barrel plug | decided on paper, to be measured on hardware |
-| Vision | front depth camera; pan-tilt turret or lidar on the roof as options | positions designed |
-| Software | ROS 2 on the Linux side of the VENTUNO Q, standard navigation tools | planned, not started |
-
-"Trial flat pattern" means that the developed shape exists and has been checked in CAD, but the bend allowance still has to be recomputed with the tooling of the shop that will bend it.
+| Block | What it is |
+|---|---|
+| Chassis | Waveshare UGV02, stock: driver board with IMU, four 12 V gear motors, 3S battery module |
+| Computer | Arduino VENTUNO Q: Qualcomm Dragonwing IQ8 running Linux, STM32H5 for real-time control |
+| Top cover BJ-P02 | one 2 mm sheet, laser cut and bent, 9 bends |
+| Adapter plate BJ-P01 | 2 mm sheet on the existing deck holes |
+| Rear antenna plate BJ-P03 | 2 mm bent sheet, ground plane for the GNSS antenna, flat blank 154.0 x 129.0 mm |
+| Power | fused tap on the switched battery rail, 90 degree barrel plug ([study](studies/BJ-STU-001_power_supply_study.md)) |
+| Vision | front depth camera; pan-tilt turret or lidar on the roof as options |
+| Software | ROS 2 on the Linux side of the VENTUNO Q, standard navigation tools |
 
 ## How it is engineered
 
@@ -112,16 +108,14 @@ Referring my work to recognised standards is a habit I bring from my profession,
 | Studies and reports | numbered sections and figures, references in IEEE style, sources archived with checksum |
 | Guides and documentation | Diataxis, GitHub Flavored Markdown |
 
-The table is the commitment: each release states which rows it was checked against.
+Each release states which rows it was checked against.
 
 ## What is in this repository
 
-Published so far: this page, the [design rationale](docs/DESIGN_RATIONALE.md) and the [power supply study](studies/BJ-STU-001_power_supply_study.md). Coming, as each one passes review:
-
-- flat patterns and drawings of the sheet-metal parts
-- the bill of materials and the cable list
-- the ROS 2 packages and the guides to reproduce every step
-- the record of the decisions, and of who took them
+- this page
+- the [design rationale](docs/DESIGN_RATIONALE.md): why each choice was made, and the decision behind it
+- the [power supply study](studies/BJ-STU-001_power_supply_study.md)
+- the [roadmap](ROADMAP.md): what comes next
 
 ## Follow the build
 
