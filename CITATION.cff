@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use or show this work, please credit it as below."
+title: "Blackjack: a rover for the Arduino VENTUNO Q on the Waveshare UGV02"
+type: software
+authors:
+  - family-names: Pistella
+    given-names: Alessandro
+repository-code: "https://github.com/alepistella/blackjack"
+url: "https://github.com/alepistella/blackjack"
+license: Apache-2.0
+date-released: 2026-11-15

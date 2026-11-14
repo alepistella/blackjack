@@ -1,0 +1,25 @@
+version = 1
+SPDX-PackageName = "blackjack"
+SPDX-PackageSupplier = "Alessandro Pistella"
+SPDX-PackageDownloadLocation = "https://github.com/alepistella/blackjack"
+
+# Documents, drawings, flat patterns, studies, diagrams
+[[annotations]]
+path = ["README.md", "LICENSING.md", "CITATION.cff", "REUSE.toml", "NOTICE", "docs/**/*.md", "docs/**/*.svg", "docs/**/*.pdf", "cad/**", "studies/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Alessandro Pistella"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# Renderings, photographs, video stills
+[[annotations]]
+path = ["docs/images/*.jpg", "docs/images/*.png"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Alessandro Pistella"
+SPDX-License-Identifier = "LicenseRef-Blackjack-AllRightsReserved"
+
+# Source code (files also carry their own SPDX header)
+[[annotations]]
+path = ["src/**", "firmware/**", "scripts/**"]
+precedence = "closest"
+SPDX-FileCopyrightText = "2026 Alessandro Pistella"
+SPDX-License-Identifier = "Apache-2.0"

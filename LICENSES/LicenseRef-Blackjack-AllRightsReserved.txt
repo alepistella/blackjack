@@ -1,0 +1,10 @@
+Copyright (c) 2026 Alessandro Pistella. All rights reserved.
+
+The renderings, videos and photographs of the Blackjack Rover in this
+repository may be viewed, and may be linked to or embedded from this
+repository with credit to the author. They may not be copied to other
+channels, modified or used commercially without the written permission
+of the author.
+
+Credit line: Blackjack Rover by Alessandro Pistella,
+github.com/alepistella/blackjack
