@@ -26,11 +26,11 @@ Blackjack is that platform, and this repository is the engineering record of how
   <img src="docs/images/blackjack_render_exploded.jpg" alt="Exploded rendering of the rover: chassis, board, cover and turret separated along the vertical axis" width="100%">
 </p>
 
-- **One sheet, no welds.** The top cover is a single 2 mm sheet, laser cut flat and then bent: 9 bends, flat blank 285.2 x 241.1 mm. Every hole and every cut-out is drawn on the flat sheet, so the part can be made by any shop with a laser and a press brake.
-- **Nothing drilled in the chassis.** The adapter plate is designed around the existing holes of the UGV02 deck.
-- **One switch for the whole robot.** The VENTUNO Q is fed from the rover battery bus through a fused line and a 90 degree barrel plug.
-- **Cooling by design.** A 40 mm fan, grilles on the roof, and the number 21 cut through both side walls: it is the name of the board, it is the game the rover is named after, and it is also an air path.
-- **Room to grow.** The cover carries the mounting patterns for a pan-tilt turret or a lidar, and for the antennas. These are designed in and stay unfitted in the base configuration.
+- **One sheet, no welds.** The top cover is a single 2 mm sheet, laser cut flat and then bent: 9 bends, flat blank 285.2 x 241.1 mm. Every hole and every cut-out is drawn on the flat sheet, so the part can be made by any shop with a laser and a press brake. [Why, and the rules it imposes](docs/DESIGN_RATIONALE.md#one-sheet-no-welds).
+- **Nothing drilled in the chassis.** The adapter plate is designed around the existing holes of the UGV02 deck. [Why](docs/DESIGN_RATIONALE.md#nothing-drilled-in-the-chassis).
+- **One switch for the whole robot.** The VENTUNO Q is fed from the rover battery bus through a fused line and a 90 degree barrel plug. The [power supply study](studies/BJ-STU-001_power_supply_study.md) shows how that was reached, and [what it costs](docs/DESIGN_RATIONALE.md#one-switch-for-the-whole-robot).
+- **Cooling by design.** A 40 mm fan, grilles on the roof, and the number 21 cut through both side walls: it is the name of the board, it is the game the rover is named after, and it is also an air path. [The reasoning](docs/DESIGN_RATIONALE.md#cooling-by-design).
+- **Room to grow.** The cover carries the mounting patterns for a pan-tilt turret or a lidar, and for the antennas. These are designed in and stay unfitted in the base configuration. [How the options share the roof](docs/DESIGN_RATIONALE.md#room-to-grow).
 
 <p align="center">
   <img src="docs/images/blackjack_render_detail_21.jpg" alt="Close rendering of the side wall of the cover with the number 21 cut through the sheet" width="100%">
@@ -116,9 +116,8 @@ The table is the commitment: each release states which rows it was checked again
 
 ## What is in this repository
 
-Published so far: this page. Coming, as each one passes review:
+Published so far: this page, the [design rationale](docs/DESIGN_RATIONALE.md) and the [power supply study](studies/BJ-STU-001_power_supply_study.md). Coming, as each one passes review:
 
-- the power supply study, with its sources
 - flat patterns and drawings of the sheet-metal parts
 - the bill of materials and the cable list
 - the ROS 2 packages and the guides to reproduce every step
