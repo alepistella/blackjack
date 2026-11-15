@@ -36,6 +36,11 @@ The candidate concentrates both loads at P3. Its suitability depends on the inst
 
 **Why.** The board has its own heatsink and fan: what an enclosure must not do is trap the warm air around them. The bay fan is therefore there for air exchange, not to blow on the board. The side grilles of the first concepts were replaced by the cut-through 21, which keeps an air path in the side walls and gives the rover its face.
 
+| Roof ventilation | Side-panel opening |
+| --- | --- |
+| ![CAD view of the perforated roof grille in the BJ-P02 cover](images/blackjack_cooling_roof.png) | ![Render of the 21 cutout in the BJ-P02 side panel](images/blackjack_render_detail_21.jpg) |
+| The perforations provide a path for air exchange through the roof. | The cutout lets air pass through the side panel. |
+
 **Record.** Purpose of the bay fan: D-011. Exhaust on one side and intake on the other: D-022. Number 21 in place of the side grilles, two roof grilles: D-063. All 12 November 2026.
 
 ## Room to grow

@@ -32,7 +32,14 @@ The adapter uses mounting points already present in the UGV02 deck. Their positi
 
 The enclosure is developed from a single 2 mm sheet with nine bends and a flat blank of 285.2 × 241.1 mm. A single blank avoids welded joints and keeps fabrication to laser cutting and press brake operations. That production route constrains the geometry. The openings must lie in the plane of the blank, the unfolded panels must fit without overlap, and adjacent panels must clear one another at bends. [Sheet-metal design rationale](docs/DESIGN_RATIONALE.md#one-sheet-no-welds).
 
-The board has its own heatsink and fan, and the enclosure needs a path for that heat to leave the bay. A dedicated 40 mm fan exchanges air with the outside through roof grilles and the **21** cut into the side panels. A common mounting centre lets a turret and a lidar share one roof layout as alternatives. CAD already includes the **BJ-P03 rear plate** and its ground-plane provision for the GNSS antenna, and the **LTE antenna opening in the BJ-P02 cover**. Building in those interfaces now lets positioning and connectivity be commissioned after the base works using the same deck and enclosure. [Cooling layout](docs/DESIGN_RATIONALE.md#cooling-by-design) · [Accessory interfaces](docs/DESIGN_RATIONALE.md#room-to-grow).
+The board has its own heatsink and fan, and the enclosure needs a path for that heat to leave the bay. A dedicated 40 mm fan exchanges air with the outside through roof grilles and the **21** cut into the side panels. [Cooling layout](docs/DESIGN_RATIONALE.md#cooling-by-design).
+
+| Roof ventilation | Side-panel opening |
+| --- | --- |
+| ![CAD view of the perforated roof grille in the BJ-P02 cover](docs/images/blackjack_cooling_roof.png) | ![Render of the 21 cutout in the BJ-P02 side panel](docs/images/blackjack_render_detail_21.jpg) |
+| The perforations provide a path for air exchange through the roof. | The cutout lets air pass through the side panel. |
+
+A common mounting centre lets a turret and a lidar share one roof layout as alternatives. CAD already includes the **BJ-P03 rear plate** and its ground-plane provision for the GNSS antenna, and the **LTE antenna opening in the BJ-P02 cover**. Building in those interfaces now lets positioning and connectivity be commissioned after the base works using the same deck and enclosure. [Accessory interfaces](docs/DESIGN_RATIONALE.md#room-to-grow).
 
 | Rear GNSS antenna | Side LTE antenna |
 | --- | --- |
