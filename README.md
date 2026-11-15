@@ -1,5 +1,7 @@
 # Blackjack Rover
 
+<img src="docs/images/blackjack-lettering-spray.png" alt="BLACKJACK in spray-painted stencil lettering" width="640">
+
 **An engineering project to explore what the Arduino VENTUNO Q and its onboard NPU can do on a ROS 2 rover.**
 
 The Qualcomm Dragonwing IQ8 (QCS8275) brings Linux and a dedicated neural processing unit to a mobile platform, alongside an STM32H5 for real-time control. Blackjack uses a stock Waveshare UGV02 as the integration platform. The engineering question is how on-device inference fits alongside sensing, navigation and drive control when they share the rover's power budget. [VENTUNO Q hardware reference](https://docs.arduino.cc/hardware/ventuno-q/).
