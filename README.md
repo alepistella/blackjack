@@ -32,7 +32,7 @@ The adapter uses mounting points already present in the UGV02 deck. Their positi
 
 The enclosure is developed from a single 2 mm sheet with nine bends and a flat blank of 285.2 × 241.1 mm. A single blank avoids welded joints and keeps fabrication to laser cutting and press brake operations. That production route constrains the geometry. The openings must lie in the plane of the blank, the unfolded panels must fit without overlap, and adjacent panels must clear one another at bends. [Sheet-metal design rationale](docs/DESIGN_RATIONALE.md#one-sheet-no-welds).
 
-The board has its own heatsink and fan, and the enclosure needs a path for that heat to leave the bay. A dedicated 40 mm fan exchanges air with the outside through roof grilles and the **21** cut into the side panels. [Cooling layout](docs/DESIGN_RATIONALE.md#cooling-by-design).
+The board has its own heatsink and fan, and the enclosure needs a path for that heat to leave the bay. A dedicated 40 mm fan exchanges air with the outside through roof grilles and the **21** cut into the side panels. The [bay ventilation study](studies/BJ-STU-002_bay_ventilation_study.md) puts numbers on it: 3.0 to 4.1 m3/h through the vents, which keeps the air around the board inside its 60 degree C rating up to 41 degrees C outside at the worst-case power of the board. [Cooling layout](docs/DESIGN_RATIONALE.md#cooling-by-design).
 
 | Roof ventilation | Side-panel opening |
 | --- | --- |

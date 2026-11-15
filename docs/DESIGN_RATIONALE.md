@@ -41,6 +41,8 @@ The candidate concentrates both loads at P3. Its suitability depends on the inst
 | ![CAD view of the perforated roof grille in the BJ-P02 cover](images/blackjack_cooling_roof.png) | ![Render of the 21 cutout in the BJ-P02 side panel](images/blackjack_render_detail_21.jpg) |
 | The perforations provide a path for air exchange through the roof. | The cutout lets air pass through the side panel. |
 
+**Proof.** [Bay ventilation study BJ-STU-002](../studies/BJ-STU-002_bay_ventilation_study.md): the fan moves 3.0 to 4.1 m3/h through the vents, which keeps the air around the board below its 60 deg C rating up to 41 deg C outside at the worst-case power of the board, 25 W held continuously.
+
 **Record.** Purpose of the bay fan: D-011. Exhaust on one side and intake on the other: D-022. Number 21 in place of the side grilles, two roof grilles: D-063. All 12 November 2026.
 
 ## Room to grow
