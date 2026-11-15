@@ -1,134 +1,72 @@
-<p align="center">
-  <img src="docs/images/blackjack_render_assembled.jpg" alt="Rendering of the Blackjack Rover: a six-wheel chassis with a black bent sheet-metal cover and a pan-tilt camera on the roof" width="100%">
-</p>
-
 # Blackjack Rover
 
-**An open ROS 2 rover platform for the Arduino VENTUNO Q and its Qualcomm Dragonwing IQ8 processor, built on a stock Waveshare UGV02 chassis and engineered in the open.**
+**An engineering project to explore what the Arduino VENTUNO Q and its onboard NPU can do on a ROS 2 rover.**
 
-I wanted to put the Arduino VENTUNO Q on wheels. The board pairs a Qualcomm Dragonwing IQ8 (QCS8275) processor running Linux with an STMicroelectronics STM32H5 microcontroller: one side for perception, navigation and edge AI, the other for real-time control. I looked for a platform to carry it and found none that really convinced me. So I am building one.
+The Qualcomm Dragonwing IQ8 (QCS8275) brings Linux and a dedicated neural processing unit to a mobile platform, alongside an STM32H5 for real-time control. Blackjack uses a stock Waveshare UGV02 as the integration platform. The engineering question is how on-device inference fits alongside sensing, navigation and drive control when they share the rover’s power budget. [VENTUNO Q hardware reference](https://docs.arduino.cc/hardware/ventuno-q/).
 
-Blackjack is that platform, and this repository is the engineering record of how it gets made: the design, the studies, the decisions and, as they arrive, the drawings and the code.
+The current design work covers mechanical packaging, the target ROS 2 architecture and a schematic-based power study. The UGV02 provides a drivetrain, motor controller and battery module, with manufacturer CAD for the mounting interface. Reusing that base focuses the initial integration on mounting the board, powering it from the rover battery and connecting ROS 2 to the motor controller. [Mounting rationale](docs/DESIGN_RATIONALE.md#nothing-drilled-in-the-chassis).
 
-## Why this combination
+[System architecture](#system-architecture) · [Design rationale](docs/DESIGN_RATIONALE.md) · [Power supply study](studies/BJ-STU-001_power_supply_study.md) · [Build roadmap](ROADMAP.md)
 
-**Arduino VENTUNO Q, with Qualcomm Dragonwing inside.** Two processors on one board is the interesting part for a mobile robot: the Qualcomm Dragonwing IQ8 side runs Linux and is meant to carry ROS 2, the vision workload and on-device AI, the STM32 side is there for hard real-time work. Blackjack is designed to use both: first the standard ROS 2 tools, then a study on moving motor control to the microcontroller.
+![CAD-based render of Blackjack Rover on the UGV02 chassis with the optional roof turret](docs/images/blackjack_render_assembled.jpg)
 
-**Waveshare UGV02.** A compact metal chassis with six wheels, four of them driven, its own driver board and a 3S battery module, sold with official CAD models and documentation. It is a solid, well documented base. Blackjack does not modify it: the kit is designed to bolt to the holes that are already in the deck.
+*Blackjack Rover design render with the optional roof turret.*
 
-**The result.** A set of bent sheet-metal parts and a wiring harness that turn a stock UGV02 into a home for the VENTUNO Q, with room for a depth camera, a pan-tilt turret or a lidar, GNSS RTK and a cellular modem.
+## System architecture
 
-## The design
+Bring-up starts with the stock UGV02 drive electronics and the front depth camera. The first mechanical build already provides for GNSS RTK and LTE, whose commissioning follows the base checks. The VENTUNO Q is the target host for the robotics software and the USB serial interface to the motor controller. Keeping that boundary explicit makes it possible to bring up and diagnose the drive interface before introducing navigation.
 
-<p align="center">
-  <img src="docs/images/blackjack_render_exploded.jpg" alt="Exploded rendering of the rover: chassis, board, cover and turret separated along the vertical axis" width="100%">
-</p>
+![Target architecture showing the depth camera, GNSS RTK and LTE connections to the Dragonwing IQ8, the UGV02 motor controller and the STM32H5 experiment for heading control and GNSS timing](docs/images/architecture.svg)
 
-- **One sheet, no welds.** The top cover is a single 2 mm sheet, laser cut flat and then bent: 9 bends, flat blank 285.2 x 241.1 mm. Every hole and every cut-out is drawn on the flat sheet, so the part can be made by any shop with a laser and a press brake. [Why, and the rules it imposes](docs/DESIGN_RATIONALE.md#one-sheet-no-welds).
-- **Nothing drilled in the chassis.** The adapter plate is designed around the existing holes of the UGV02 deck. [Why](docs/DESIGN_RATIONALE.md#nothing-drilled-in-the-chassis).
-- **One switch for the whole robot.** The VENTUNO Q is fed from the rover battery bus through a fused line and a 90 degree barrel plug. The [power supply study](studies/BJ-STU-001_power_supply_study.md) shows how that was reached; the [rationale](docs/DESIGN_RATIONALE.md#one-switch-for-the-whole-robot) gives the trade-off.
-- **Cooling by design.** A 40 mm fan, grilles on the roof, and the number 21 cut through both side walls: it is the name of the board, it is the game the rover is named after, and it is also an air path. [The reasoning](docs/DESIGN_RATIONALE.md#cooling-by-design).
-- **Room to grow.** The cover carries the mounting patterns for a pan-tilt turret or a lidar, and for the antennas. These are designed in and stay unfitted in the base configuration. [How the options share the roof](docs/DESIGN_RATIONALE.md#room-to-grow).
+**Host and base interface.** The software design targets Ubuntu, ROS 2 Jazzy and the Qualcomm Intelligent Robotics SDK on the Dragonwing IQ8. The base node is designed to translate velocity commands into the UGV02 controller’s JSON protocol over USB serial. Its design uses wheel encoder feedback for odometry and publishes IMU data from the controller. Wheel slip during skid steering makes odometry accuracy a validation item, particularly in turns. This gives teleoperation and navigation a common drive interface, with the chassis protocol contained in the base node.
 
-<p align="center">
-  <img src="docs/images/blackjack_render_detail_21.jpg" alt="Close rendering of the side wall of the cover with the number 21 cut through the sheet" width="100%">
-</p>
+**Perception and compute.** The front depth camera supplies range data over USB. Checking that stream separately from navigation makes it possible to distinguish a sensor or driver fault from a mapping or localisation fault. The first workload selected for the NPU is camera-based object detection as a ROS 2 node. To characterise it on the rover, the test plan calls for recording the model and runtime configuration, latency from image receipt to detection publication, and board input power with the drive stack running. [Bring-up sequence and extensions](ROADMAP.md).
 
-## Architecture
+**Positioning and connectivity.** When positioning is commissioned, the ZED-F9P computes the RTK position. Linux uses the SIM7672E LTE connection to fetch corrections from an NTRIP caster and forwards RTCM data to the receiver. The real-time experiment uses the receiver’s time pulse as a hardware timing reference for motion measurements on the STM32H5. A local IMU supplies the measurements for the separate heading correction loop. [RTK and LTE bring-up](ROADMAP.md#rtk-and-lte-bring-up) · [STM32H5 heading control](ROADMAP.md#stm32h5-heading-control).
 
-<p align="center">
-  <img src="docs/images/architecture.svg" alt="Block diagram: the stock UGV02 with battery, driver board and motors; the Blackjack kit with cover, plate and power harness; the VENTUNO Q with its two processors and the depth camera" width="100%">
-</p>
+## Mechanical integration
 
-| Block | What it is |
-|---|---|
-| Chassis | Waveshare UGV02, stock: driver board with IMU, four 12 V gear motors, 3S battery module |
-| Computer | Arduino VENTUNO Q: Qualcomm Dragonwing IQ8 running Linux, STM32H5 for real-time control |
-| Top cover BJ-P02 | one 2 mm sheet, laser cut and bent, 9 bends |
-| Adapter plate BJ-P01 | 2 mm sheet on the existing deck holes |
-| Rear antenna plate BJ-P03 | 2 mm bent sheet, ground plane for the GNSS antenna, flat blank 154.0 x 129.0 mm |
-| Power | fused tap on the switched battery rail, 90 degree barrel plug ([study](studies/BJ-STU-001_power_supply_study.md)) |
-| Vision | front depth camera; pan-tilt turret or lidar on the roof as options |
-| Software | ROS 2 on the Linux side of the VENTUNO Q, standard navigation tools |
+![Exploded CAD-based render showing the enclosure, electronics and stock chassis as separate assemblies](docs/images/blackjack_render_exploded.jpg)
 
-## How it is engineered
+The adapter uses mounting points already present in the UGV02 deck. Their positions come from the manufacturer’s CAD, so the mounting interface is defined against the chassis geometry and the installation is reversible. [Adapter design rationale](docs/DESIGN_RATIONALE.md#nothing-drilled-in-the-chassis).
 
-<p align="center">
-  <img src="docs/images/method.svg" alt="Diagram of the method: sources, measurements, decisions, design and release gate, with Alessandro deciding and AI agents doing work under written rules" width="100%">
-</p>
+The enclosure is developed from a single 2 mm sheet with nine bends and a flat blank of 285.2 × 241.1 mm. A single blank avoids welded joints and keeps fabrication to laser cutting and press brake operations. That production route constrains the geometry. The openings must lie in the plane of the blank, the unfolded panels must fit without overlap, and adjacent panels must clear one another at bends. [Sheet-metal design rationale](docs/DESIGN_RATIONALE.md#one-sheet-no-welds).
 
-The rover is half of the project. The other half is the method.
+The board has its own heatsink and fan, and the enclosure needs a path for that heat to leave the bay. A dedicated 40 mm fan exchanges air with the outside through roof grilles and the **21** cut into the side panels. A common mounting centre lets a turret and a lidar share one roof layout as alternatives. CAD already includes the **BJ-P03 rear plate** and its ground-plane provision for the GNSS antenna, and the **LTE antenna opening in the BJ-P02 cover**. Building in those interfaces now lets positioning and connectivity be commissioned after the base works using the same deck and enclosure. [Cooling layout](docs/DESIGN_RATIONALE.md#cooling-by-design) · [Accessory interfaces](docs/DESIGN_RATIONALE.md#room-to-grow).
 
-- **Every number has an origin.** Data sheets, schematics and official CAD models are archived with their checksum. A value is either read from one of them or measured, and the record says which.
-- **Every decision is written down**, with who proposed it, who took it, why, and what was rejected.
-- **AI agents do a large share of the work**, and this is stated plainly rather than hidden. They model, calculate, search and draft, under written rules they cannot override. They decide nothing and publish nothing. I set the goals, take the decisions and correct the work, and the corrections are recorded too, including the mistakes.
-- **What is published is what has been verified.** The working material lives in a private workspace. This repository receives a part only when it is mature and checked.
+| Rear GNSS antenna | Side LTE antenna |
+| --- | --- |
+| ![CAD close-up of the GNSS antenna on the BJ-P03 rear plate](docs/images/blackjack_gnss_rear_plate.png) | ![CAD close-up of the right-angle LTE antenna on the side of the BJ-P02 cover](docs/images/blackjack_lte_side_antenna.png) |
+| The antenna sits on BJ-P03 behind the deck. | The antenna passes through BJ-P02 and folds back along the side panel. |
 
-On 14 November 2026 the record holds 86 decisions, 83 measurement records and 58 archived sources, checked against 23 written invariants.
+## Electrical design and bench verification
 
-### The rules the work runs on
+One switch must control power to both the computer and the drivetrain. Tapping the switched rail is the simplest of the four architectures compared in the study because it keeps the stock switching stage. Both loads would then pass through the battery module’s P3 output. The design also needs to account for how the board behaves at the voltages available on a 3S bus. Arduino lists 12–24 V for the barrel input in its connector table and discusses operation below 12 V subject to the available input power. [Switching alternatives](studies/BJ-STU-001_power_supply_study.md#49-the-rover-switch) · [VENTUNO Q power inputs](studies/BJ-STU-001_power_supply_study.md#46-ventuno-q-power-inputs).
 
-The agents are not the method. The method is the set of rules I imposed on them and on myself:
+![Candidate power topology showing the switched battery rail supplying the UGV02 motor driver and a fused branch to the VENTUNO Q](docs/images/power-path.svg)
 
-1. **One source of truth**, outside any chat or tool. It survives the loss of any single session.
-2. **Separate roles**: lead, mechanics, electronics, software, communication. Each has its own area; work for another role is handed over in writing.
-3. **Written invariants** that no agent can override. A conflict between an instruction and an invariant is declared, not settled quietly.
-4. **Confirm before work**: what was understood, what will be produced, which files, which decisions are open. Then the work.
-5. **Verify before stating**: on the files, on the archived sources, on the result itself. What cannot be verified is marked as not verified.
-6. **Checked against its standard before it is called ready.** Every document, drawing and piece of code is compared with the reference standard of its kind and adapted. The check is recorded in the file, with the edition used and any deviation.
-7. **Traceability**: every number to a source or a measurement, every decision to who proposed it and who took it.
-8. **Errors stay on the record**, with their cause and their correction.
-9. **State saved at least hourly**, so that someone else can pick the work up.
-10. **A release gate** between the private workspace and this repository. I approve every release.
-11. **The engineer decides.** Agents propose, calculate, model and draft.
+The study uses a 33 W peak from an Arduino reference workload as a design case. At 11.1 V, the board alone would draw about 2.97 A before adding the motor load. Waveshare publishes 2 A for the retail module’s battery output, and the installed module revision must be identified before applying that rating to the rover. The shared rail is a candidate topology. Retaining it depends on the confirmed module ratings and measurements of the combined load. [Current budget](studies/BJ-STU-001_power_supply_study.md#5-current-budget) · [Bench test plan](studies/BJ-STU-001_power_supply_study.md#7-bench-test-plan).
 
-### Standards
+## Engineering standards and traceability
 
-Referring my work to recognised standards is a habit I bring from my profession, and I required it here: every standard in this table was adopted at my request. The table covers the method and what the project produces. It says nothing about bought parts: this is a personal project, not a product for sale.
+Each deliverable has a reference appropriate to its discipline. Before release, I review the work against that reference and record the edition used and the reason for any deviation. Requirements have identifiers so a design decision and its verification can be traced back to the same requirement. For example, REQ-MEC-001 calls for a chassis without irreversible modifications. The adapter reuses the factory mounting holes, and the fit check compares that interface against the physical deck.
 
-"Follows" means written to the standard and checked against it; it is not a third-party certification. A deviation is written down with its reason. Editions were checked on 14 November 2026.
+| Discipline | Reference | Application |
+| --- | --- | --- |
+| Requirements | [ISO/IEC/IEEE 29148](https://www.iso.org/standard/72089.html) | Write requirements that can be checked by inspection, analysis or test. |
+| Mechanical drawings | [ISO 129-1](https://www.iso.org/standard/64007.html) | Define how dimensions and tolerances are presented on fabrication drawings. |
+| Electrical documentation | [IEC 60617](https://webstore.iec.ch/en/publication/2723) | Use standard graphical symbols in electrical schematics. |
+| Harness workmanship | IPC/WHMA-A-620 | Use a reference for wire terminations, crimps and workmanship inspection. |
+| ROS 2 interfaces | [REP 103](https://github.com/ros-infrastructure/rep/blob/master/rep-0103.rst) and [REP 105](https://github.com/ros-infrastructure/rep/blob/master/rep-0105.rst) | Establish units, axis conventions and the roles of frames such as `base_link` and `odom`. |
 
-| Kind of work | Standard followed |
-|---|---|
-| Quantities, units, dates | SI, ISO 80000-1:2022, ISO 8601-1:2019 |
-| Requirements | ISO/IEC/IEEE 29148:2018, key words of BCP 14 (RFC 2119, RFC 8174) |
-| Decisions | Architecture Decision Record format |
-| Configuration and revisions | ISO 10007:2017 as guidance |
-| Mechanical drawings | ISO 128 series, ISO 129-1:2018, ISO 5457, ISO 7200, general tolerances ISO 2768-1 class m |
-| Sheet-metal flat patterns | 1:1 DXF with named cut and bend layers, bend data declared |
-| Fasteners and threads | ISO designations in drawings and lists |
-| Electrical diagrams | IEC 60617, IEC 61082-1:2014, IEC 81346-1:2022 |
-| Cables and harness | IPC/WHMA-A-620 Revision F as workmanship reference |
-| ROS 2 software | ROS 2 developer guide and code style, REP 103, REP 105, REP 144, REP 2004 |
-| Python and C++ | PEP 8, PEP 257, type hints; ROS 2 C++ style |
-| Microcontroller firmware | MISRA C:2025 as guideline, deviations recorded |
-| Shell scripts | Google Shell Style Guide, ShellCheck |
-| Commits, versions, change log | Conventional Commits 1.0.0, Semantic Versioning, Keep a Changelog 1.1.0 |
-| Licences in files | SPDX identifiers, REUSE Specification 3.3 |
-| Studies and reports | numbered sections and figures, references in IEEE style, sources archived with checksum |
-| Guides and documentation | Diataxis, GitHub Flavored Markdown |
+The engineering record distinguishes manufacturer data, CAD measurements, calculations and physical test results. I set the requirements, make the engineering decisions and review releases. I use AI tools to assist with modelling, analysis and documentation.
 
-Each release states which rows it was checked against.
+## Related ROS 2 work
 
-## What is in this repository
+In the separate **dum-e** project I investigated reactive navigation with a small neural network in ROS 2 and Gazebo. A language model wrote the network weights directly, then used recorded runs and activation traces to revise them. During execution, the network converted lidar inputs into motion commands. The language model’s role was in development.
 
-- this page
-- the [design rationale](docs/DESIGN_RATIONALE.md): why each choice was made, and the decision behind it
-- the [power supply study](studies/BJ-STU-001_power_supply_study.md)
-- the [roadmap](ROADMAP.md): what comes next
+One recorded comparison starts both revisions from the same simulated pose. The earlier controller circles until timeout. The revised controller searches for a wall, follows it and crosses the doorway. The study documents the paired trajectories and the controller revision. It also includes a Nav2 reference configuration for selected scenarios and the individual run records. [A robot controller, written in weights](https://alepistella.github.io/dum-e/written-in-weights.html) · [Reproduction guide](https://alepistella.github.io/dum-e/reproduce.html) · [Recorded results](https://alepistella.github.io/dum-e/results.html).
 
-## Follow the build
+## Licensing
 
-The build is documented while it happens, on video and here. Watch the repository to see each part land.
-
-## Credits and licence
-
-Designed and engineered by **Alessandro Pistella**.
-
-If you use or show this work, please credit: *Blackjack Rover by Alessandro Pistella, github.com/alepistella/blackjack*.
-
-Code is released under the Apache License 2.0; documents, drawings, flat patterns, studies and diagrams under Creative Commons Attribution 4.0; renderings and videos remain all rights reserved. In every case the condition is the credit above. Details in [LICENSING.md](LICENSING.md).
-
-Arduino, VENTUNO, Qualcomm, Dragonwing, STM32, ROS and Waveshare are trademarks of their respective owners. This is an independent project, not affiliated with or endorsed by any of them. Their products are named here only to say what Blackjack is built for.
-
-*Keep the smoke in, and have fun.*
+See [licensing and attribution](LICENSING.md) for the terms that apply to documentation, code and renderings.

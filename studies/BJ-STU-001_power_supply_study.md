@@ -3,16 +3,13 @@
 | | |
 |---|---|
 | Document | BJ-STU-001 |
-| Revision | B |
-| Date | 14 November 2026 |
-| Status | Released for publication by Alessandro Pistella on 15 November 2026 |
+| Revision | C |
+| Date | 15 November 2026 |
 | Project | Blackjack Rover: rover for the Arduino VENTUNO Q on a Waveshare UGV02 chassis |
-| Requested by | Alessandro Pistella |
-| Prepared by | Alessandro Pistella, with AI agents working under written rules, on the archived schematics and on the CAD model |
 | Licence | CC BY 4.0, credit: Blackjack Rover by Alessandro Pistella, github.com/alepistella/blackjack |
 | Measurement records | RIL-004, RIL-011, RIL-057, RIL-072, RIL-073, RIL-074 |
 
-This study is built on the published schematics and data sheets of the parts and on measurements taken on the CAD model. Every statement is traced to its source.
+This study compares four architectures for powering the VENTUNO Q and the drivetrain with one switch. The direct branch is the simplest candidate. The shared output rating and the board’s behaviour below the published barrel-input range are the main constraints. The evidence consists of supplier documentation, schematic analysis and measurements from CAD.
 
 ## Contents
 
@@ -38,7 +35,7 @@ This study is built on the published schematics and data sheets of the parts and
 
 ## 1. Purpose and questions
 
-The stock UGV02 carries a battery module with three 18650 cells. Blackjack adds a VENTUNO Q, which is a much heavier load than the rover electronics alone. Before choosing a power architecture, Alessandro asked for the following to be checked on the schematics:
+The stock UGV02 carries a battery module with three 18650 cells. Adding a VENTUNO Q changes the load on the shared battery output. The study examines the charging, switching and power interfaces against the proposed installation.
 
 1. Who charges the battery, with which profile, actively or passively, and whether the charger can be replaced by a LiPo charger with the same footprint.
 2. Whether the power path can carry the current we need.
@@ -50,26 +47,26 @@ The stock UGV02 carries a battery module with three 18650 cells. Blackjack adds 
 
 ## 2. Sources
 
-Every source is kept in the project archive with its SHA-256 fingerprint. Third-party documents are cited here, not reproduced: schematics and data sheets remain with their owners. Identifiers of the form RIL-nnn, OI-nn and D-nnn refer to the measurement, open-issue and decision registers of the project.
+The project archive records SHA-256 fingerprints for downloaded references. The table also identifies references consulted online. RIL and D identifiers refer to measurement and decision records.
 
 | ID | Source | Used for |
 |---|---|---|
-| SRC-01 | Arduino VENTUNO Q datasheet ABX00181, 62 pages, "Modified: 12/11/2026" | ratings, power consumption, JCTL and JMISC pins, pushbutton |
-| SRC-04 | Arduino VENTUNO Q schematics ABX00181, 71 sheets | sheet 50 "POWER", sheet 51 "POWER DCDC SOM" |
-| SRC-09 | Waveshare "ROS Driver for Robots" schematic, one sheet | driver board power input, 5 V converter |
-| SRC-30 | Waveshare "UPS Module 3S" schematic (Ups01), one sheet | battery module |
-| SRC-W05 | Waveshare wiki, General Driver for Robots (archived page) | input range, role of the 40-pin header |
+| SRC-01 | [Arduino VENTUNO Q datasheet ABX00181](https://docs.arduino.cc/resources/datasheets/ABX00181-datasheet.pdf), 62 pages, "Modified: 12/11/2026" | ratings, power consumption, JCTL and JMISC pins, pushbutton |
+| SRC-04 | [Arduino VENTUNO Q schematics ABX00181](https://docs.arduino.cc/resources/schematics/ABX00181-schematics.pdf), 71 sheets | sheet 50 "POWER", sheet 51 "POWER DCDC SOM" |
+| SRC-09 | [Waveshare driver board schematic](https://files.waveshare.com/wiki/common/ROS_Driver_for_Robots.pdf), one sheet | driver board power input, 5 V converter |
+| SRC-30 | [Waveshare UPS Module 3S schematic](https://files.waveshare.com/wiki/UPS%20Module%203S/Ups01.pdf), one sheet | battery module |
+| SRC-W05 | [Waveshare General Driver for Robots](https://www.waveshare.com/wiki/General_Driver_for_Robots) (archived page) | input range, role of the 40-pin header |
 | SRC-32 | Waveshare assembly video, https://www.youtube.com/watch?v=8wqPs7rNkJ4, two frames supplied by Alessandro on 14 November 2026 | position of the battery module, host mounting |
 | SRC-N13 | Raspberry Pi Ltd, white paper "USB Power Delivery on Raspberry Pi 5" (read on the web, not archived) | powering a Raspberry Pi 5 from the GPIO header |
 | CAD | Fusion document "Blackjack_B", milestone M3 | battery bay |
 
-The identity of the battery module fitted in the UGV02 with the retail "UPS Module 3S" of SRC-30 is inferred (same four 2-pin connectors, same cell holder, same board size), not confirmed on the part: see RIL-057. A frame of SRC-32 supports it (section 4.10).
+The identity of the battery module fitted in the UGV02 with the retail "UPS Module 3S" of SRC-30 is inferred (same four 2-pin connectors, same cell holder, same board size), not confirmed on the part: see RIL-057. The assembly video supports the location and layout (section 4.10). Confirm the part marking before using the retail module as the electrical reference.
 
 ## 3. Method and limits
 
 - Schematics were rendered to images and read by eye, with text extraction to locate nets and part numbers. Part values quoted here are the ones printed on the sheets.
 - Track widths, copper weight and connector contact ratings are not on any schematic. Where a limit depends on them, it is stated as unknown.
-- Component ratings that are not printed on the sheets (for example the current rating of an AO4407A or of a TB6612FNG) are not quoted as facts in this revision. Their datasheets are to be archived first (invariant I-05).
+- Section 9 lists component ratings from datasheets. The assembled module also depends on its PCB, wiring, connector and thermal conditions.
 - The battery bay was measured on the CAD model with a point grid (section 4.10). The body in the model is the UGV Rover body, which matches the UGV02 on the dimensions compared so far (RIL-006, RIL-009). The stock wiring is not modelled.
 
 ## 4. Findings
@@ -84,19 +81,11 @@ Balancing is passive: each HY2213 switches a 62 ohm resistor across its cell nea
 
 *Figure 1 (not reproduced here, see the cited source). Battery module, excerpt of SRC-30: input P1 with fuse and M1, shunt R2 (0.1 ohm) with INA219, protection S-8254AA with the MOSFET, balancing HY2213.*
 
-Answer to question 1: the charger is the external adapter; the module is passive with respect to the charge profile and balances passively. There is nothing on the board to replace with a LiPo charger.
+The schematic places charge-profile regulation in the external adapter. The battery module provides protection and passive balancing.
 
 ### 4.2 LiPo against Li-ion charging
 
-A standard lithium polymer cell and a standard lithium-ion 18650 cell are charged in the same way: constant current, then constant voltage at 4.20 V per cell. A 3S pack of either kind is charged at 12.6 V. This is general battery knowledge, not taken from an archived source; the datasheet of the cells actually bought decides.
-
-Two chemistries must not be charged with a 12.6 V adapter: high-voltage LiPo (LiHV, 4.35 V per cell) and LiFePO4 (3.65 V per cell).
-
-What does change with a LiPo pack:
-
-- the charge current must suit the capacity of the pack (to read on the label of the adapter and on the datasheet of the pack);
-- the pack must either bring its balance leads to the module (nodes V1, V2, V3 of SRC-30) or carry its own protection and balancing;
-- a soft pouch pack needs mechanical protection inside a metal chassis.
+The study uses the documented stock battery arrangement. Any substitute pack requires a separate check against the selected cell and pack documentation for charge voltage and current, balancing, protection and mechanical fit. The number of cells in series alone does not establish charger compatibility.
 
 ### 4.3 Current capability of the battery module
 
@@ -109,9 +98,9 @@ All the current of the pack, charge and discharge, flows through R2: 0.1 ohm, 1%
 | 5.0 A | 2.50 W | 0.50 V |
 | 6.0 A | 3.60 W | 0.60 V |
 
-The INA219 measures a shunt voltage up to 0.32 V at its widest range (INA219 datasheet, not archived): with 0.1 ohm it saturates at 3.2 A. The power rating of R2 is not printed on the sheet. The module is therefore built around roughly 3 A continuous.
+The INA219 full-scale shunt input is ±0.32 V at its widest setting (SRC-34). With a 0.1 Ω shunt, that corresponds to 3.2 A of measurement range. The schematic gives no power rating for R2. Continuous output capacity depends on the assembled module, including shunt dissipation, PCB heating, protection and the output connector. [INA219 datasheet](https://www.ti.com/lit/ds/symlink/ina219.pdf).
 
-The output is switched by one MOSFET, M3, and leaves through connector P3 (XH2.54, 2 pins). The Waveshare wiki of the retail module rates that port "12.6V 2A" (page not archived). The overcurrent sense resistors are R21 and R22, 0.01 ohm 2512 each.
+The output is switched by one MOSFET, M3, and leaves through connector P3 (XH2.54, 2 pins). Waveshare lists 2 A for the retail module’s XH2.54 battery output. The link identifies the retail reference, pending identification of the module fitted to the rover. [Waveshare UPS Module 3S](https://www.waveshare.com/wiki/UPS_Module_3S#Interface_Definition). The overcurrent sense resistors are R21 and R22, 0.01 ohm 2512 each.
 
 *Figure 2 (not reproduced here, see the cited source). Battery module, excerpt of SRC-30: M4 (ideal diode, marked OPTION), M3 (output switch), R39 1 M from gate to source, connector P4 "SWITCH" between the gate of M3 and ground, output P3 on net VBAT.*
 
@@ -129,7 +118,7 @@ Answer to question 3: a 3S LiPo ranges from 9.0 V (empty) to 12.6 V (full), the 
 
 ### 4.5 How Waveshare powers a Raspberry Pi 5 in the same rover
 
-Alessandro observed that the assembly video (SRC-32) shows no USB-C cable to the Raspberry Pi: the host is connected to the driver board through the 40-pin header only.
+The assembly video (SRC-32) shows the host mounted on the driver board’s 40-pin header, with no visible USB-C supply cable.
 
 That matches the documents:
 
@@ -140,7 +129,7 @@ A Raspberry Pi 5 can be powered through the 5 V pins of its header. Raspberry Pi
 
 *Figure 4 (not reproduced here, see the cited source). Frame from SRC-32: the host is lifted off; below it the stacked boards on brass standoffs with the 40-pin riser on the left. No USB-C power cable is visible.*
 
-Consequence for Blackjack: in the stock rover, the whole power of the host (up to 25 W at the output of the 5 V converter) already comes from the single battery output P3 and passes through the 0.1 ohm shunt of the battery module, together with the motors. Waveshare itself uses that path above the 2 A written in the wiki. The VENTUNO Q cannot use the 5 V converter (it needs at least 7 V), but it can take the same battery voltage from the same switched rail, and the 5 V 5 A converter then stays unloaded.
+The stock design shows how a host and drivetrain can share a supply topology. The 25 W converter figure describes the nominal converter output. The video provides evidence for the connection arrangement. Neither source reports the actual host current or qualifies the retail module for a load above its documented rating.
 
 ### 4.6 VENTUNO Q power inputs
 
@@ -152,7 +141,7 @@ From SRC-01, chapters 3 and 4.3, and SRC-04, sheet 50:
 | Barrel jack 5.5 x 2.1 mm | 12 to 24 V | 5 A |
 | Screw terminal | 7 to 24 V | 10 A |
 
-On the schematic the barrel jack J5 and the screw terminal J8 are the same net, "7V-24V". The difference between "12 V minimum" and "7 V minimum" is therefore not electrical. The datasheet explains it with the contact rating of the jack: "at 7 V (5 A) the maximum deliverable power is 35 W; at 12 V it is 60 W", and "the board requires a minimum of 7 V at its connectors".
+On the schematic the barrel jack J5 and the screw terminal J8 are the same net, "7V-24V". The datasheet separately discusses the board’s 7 V startup floor and the power available through the jack at lower voltages. Its connector table specifies 12–24 V for the barrel jack. The common net explains the circuit arrangement. Operation down to the proposed low end of the 3S bus remains a design question under load.
 
 *Figure 5 (not reproduced here, see the cited source). VENTUNO Q, excerpt of SRC-04 sheet 50: barrel jack J5 and screw terminal J8 on the same net, TVS D5, power switch U15 (KTS1900) with MOSFET Q1 and Q2.*
 
@@ -160,7 +149,7 @@ Power available through the jack at its 5 A limit, over the range of a 3S pack:
 
 | Bus voltage | Power at 5 A |
 |---|---|
-| 9.0 V (pack empty) | 45 W |
+| 9.0 V (low-voltage design case) | 45 W |
 | 11.1 V (nominal) | 55.5 W |
 | 12.6 V (pack full) | 63 W |
 
@@ -168,7 +157,7 @@ Measured consumption of the board, SRC-01 section 3.4.1, at 12 V: 7.07 W average
 
 After the input, each path passes an ideal-diode power switch (KTS1900 with two SQS414CENW MOSFET), then a 2 milliohm shunt with an INA232 that measures the total input current of the board.
 
-Answer to question 5, first part: a 3S pack can feed the board directly, on the screw terminal or on the barrel jack. A 90 degree barrel plug needs no converter. The condition is to stay under 5 A in the plug, which holds with margin at the measured peaks.
+The direct barrel feed is a candidate. The comparison uses the available jack power and reference workloads to estimate demand. The selected installed connector pair, voltage at the board under transients and shared module capacity determine which part of the proposed bus range is usable.
 
 ### 4.7 VENTUNO Q power control input
 
@@ -259,28 +248,33 @@ For comparison, the stock host supply: 5 V at 5 A is 25 W at the output of the c
 
 The rover's own current (four motors, driver board, servos, lights) is not in any archived source as a measured figure.
 
-Reading: the peak of the VENTUNO Q is of the same class as the peak that Waveshare already draws for a Raspberry Pi 5 through the same battery module. The averages are about half of the peaks.
+The Raspberry Pi comparison uses nominal converter capacity. The VENTUNO Q columns are estimates based on Arduino reference workloads and assume constant power across the three bus voltages. Actual rover inference and motor loads require their own measurements.
 
 ## 6. What the findings allow
 
-This section lists what becomes possible. It does not choose.
+The evidence supports the following conclusions for the candidate architectures.
 
-1. The 90 degree barrel plug is electrically valid on the 3S bus, without a converter (section 4.6).
+1. A direct barrel feed removes a converter from the branch. Qualification depends on connector fit and the board’s voltage and power limits (section 4.6).
 2. A single switch for the whole rover needs no added electronics if the board is fed from the switched rail (way A of section 4.9). The cost is that the board's current passes the battery module, as the host's current does in the stock rover.
-3. Keeping the stock battery module limits the continuous current to about 3 A by its 0.1 ohm shunt. Peaks of rover plus board go above that; how the module behaves there is not known from the documents.
-4. Autonomy is a separate question from the power path. With the stock module removed there is room for four times the cells (section 4.10). A larger pack needs its own protection, balancing, switch stage and current measurement, and keeps the same 12.6 V adapter.
-5. The VENTUNO Q measures its own input current (INA232), and the driver board measures its own (INA219 at 0x42). Both branches can be monitored without added parts, whichever battery is used.
+3. The 33 W reference case alone exceeds the retail module’s documented 2 A output throughout the three voltage cases. Identify the installed module and apply its ratings to the combined load before retaining the stock path.
+4. The CAD envelope provides a geometric upper bound for evaluating a larger pack. Packaging, protection, charging compatibility and the power path require a separate design review (section 4.10).
+5. The VENTUNO Q measures its own input current (INA232), and the driver board measures its own (INA219 at 0x42). These monitors can provide branch telemetry within their ranges. Bench instrumentation is needed to capture the shared output and fast transients.
 
 ## 7. Bench test plan
+
+Characterise the base configuration first. Repeat the load checks with RTK and LTE active before commissioning positioning and connectivity, including modem transmission events. The first enclosure already incorporates the antenna mounting provisions.
 
 | Item | What is measured |
 |---|---|
 | Battery module identity | part marking, connectors P1..P4, value and size of the shunt |
 | Deck switch | latching or momentary, contacts, hole size |
-| Rover current | at rest, driving, stalled, at 9 V and at 12.6 V |
-| VENTUNO Q current | boot, inference, peaks, on the 3S bus |
+| Drivetrain load | Record idle, driving and controlled motor transients after confirming the permissible voltage and load limits. |
+| VENTUNO Q load | Characterise boot and the selected inference workload on a supply within the board’s published connector range. Use those traces to evaluate the candidate rail. |
+| Barrel interface | Identify the fitted jack. Check plug engagement and applicable contact ratings for the pair. |
 | VENTUNO Q residual current | disable pin low; after a 10 s press; after a shutdown from Linux |
-| Charge | adapter label (voltage, current), temperature of the module while charging |
+| Combined load | Measure shared output current and board input voltage during defined motor and inference events. Compare the traces with the installed hardware ratings and record any supply drop or reset. |
+| Thermal behaviour | Record the connector and module temperatures during sustained load at a documented ambient temperature. Compare with applicable component and assembly limits. |
+| Charge | Adapter label, compatibility with the selected stock cells and module temperature during charging. |
 | Driver board switch | the wiki lists an on-board switch for the external supply: what it switches |
 | Battery bay | real free dimensions with the stock wiring |
 
@@ -294,7 +288,7 @@ Every value below is copied from a data sheet kept in the project archive with i
 
 ### 9.1 Decision
 
-D-079 (Alessandro): stock battery module, VENTUNO Q fed through barrel jack J5 with a 90 degree plug, power taken from the switched rail (output P3), one switch for the whole robot.
+D-079 records the candidate for bench evaluation: a fused branch from P3 to barrel jack J5, with a right-angle plug and a shared deck switch.
 
 ### 9.2 Ratings
 
@@ -313,9 +307,9 @@ D-079 (Alessandro): stock battery module, VENTUNO Q fed through barrel jack J5 w
 
 ### 9.3 What the ratings say about the decision
 
-- The weakest element of the chosen path is the XH contact of P3: 3 A, against 2.62 A (12.6 V) to 3.67 A (9.0 V) for the VENTUNO Q alone at its measured peak of 33.0 W, plus the rover. The MOSFET switch has a wide margin (12 A). The limit is the connector and the 0.1 Ohm shunt, not the switch.
-- The plug must be chosen on its rating: 8.5 A for the Tensility part, 0.5 A for an apparently identical Schurter part.
-- A full 3S pack is 0.9 V below the maximum operating voltage of the motor drivers: nothing above 3S on this rail.
+- The retail output rating, the connector catalogue rating and the current monitor range describe three different limits. The MOSFET’s datasheet current also depends on its mounting and temperature. Use the installed module rating for acceptance and evaluate shunt dissipation, voltage drop and temperature under the defined load.
+- The Tensility drawing gives 8.5 A for the cable. That figure cannot establish the rating of the mated connection. Arduino lists a 5.5 × 2.1 mm barrel interface, while the jack identified in the STEP model is catalogued with a 2.0 mm centre pin. Confirm the fitted jack, plug engagement and contact ratings before selecting the harness.
+- The 12.6 V upper design case is 0.9 V below the motor driver IC’s 13.5 V operating maximum. Actual voltage at the driver during transients is part of the electrical check.
 
 ### 9.4 Plug in the model
 
@@ -323,4 +317,4 @@ D-079 (Alessandro): stock battery module, VENTUNO Q fed through barrel jack J5 w
 
 Figure 10: own work, screenshot of the Fusion model "Blackjack_B", 14 November 2026. The plug is redrawn from the dimensions of Tensility drawing 10-01780 (SRC-45).
 
-No interference. Plug head to the WiFi antenna of the UGV02: 1.32 mm; to the edge of the cover opening: 0.50 mm. The cable cannot leave downwards (strain relief 25 mm, jack axis 20.2 mm above the deck): it leaves sideways behind the rear wall.
+The CAD view checks the nominal envelope. Assembly tolerance, plug engagement and cable routing need a fit check on the fitted parts. Plug head to the WiFi antenna of the UGV02: 1.32 mm; to the edge of the cover opening: 0.50 mm. The cable cannot leave downwards (strain relief 25 mm, jack axis 20.2 mm above the deck): it leaves sideways behind the rear wall.
