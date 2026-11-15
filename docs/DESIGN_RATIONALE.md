@@ -28,11 +28,11 @@ This record explains the requirements, alternatives and design constraints behin
 
 A shared switch is a requirement for the board and drive electronics. The candidate design takes the board feed from the stock switched rail through a fused branch and a right-angle barrel plug. This keeps one switching stage and reduces the space required behind the board.
 
-The candidate concentrates both loads at P3. Its suitability depends on the installed module’s output rating, the board’s input limits and the combined load measurements. The study compares separate switching stages and a dedicated switch as alternatives. [Power design decision](../studies/BJ-STU-001_power_supply_study.md#91-decision) · [Bench test plan](../studies/BJ-STU-001_power_supply_study.md#7-bench-test-plan). Decision D-079, 14 November 2026.
+The candidate concentrates both loads at P3. Its suitability depends on the installed module's output rating, the board's input limits and the combined load measurements. The study compares separate switching stages and a dedicated switch as alternatives. [Power design decision](../studies/BJ-STU-001_power_supply_study.md#91-decision) · [Bench test plan](../studies/BJ-STU-001_power_supply_study.md#7-bench-test-plan). Decision D-079, 14 November 2026.
 
 ## Cooling by design
 
-**The choice.** A 40 mm fan exchanges the air of the bay; two grilles on the roof sit above the heatsink of the board and above the fan; the number 21 is cut through both side walls.
+**The choice.** A 40 mm fan exchanges the air of the bay; a grille on the roof sits above the heatsink of the board and a slotted vent above the fan; the number 21 is cut through both side walls.
 
 **Why.** The board has its own heatsink and fan: what an enclosure must not do is trap the warm air around them. The bay fan is therefore there for air exchange, not to blow on the board. The side grilles of the first concepts were replaced by the cut-through 21, which keeps an air path in the side walls and gives the rover its face.
 
@@ -41,7 +41,7 @@ The candidate concentrates both loads at P3. Its suitability depends on the inst
 | ![CAD view of the perforated roof grille in the BJ-P02 cover](images/blackjack_cooling_roof.png) | ![Render of the 21 cutout in the BJ-P02 side panel](images/blackjack_render_detail_21.jpg) |
 | The perforations provide a path for air exchange through the roof. | The cutout lets air pass through the side panel. |
 
-**Proof.** [Bay ventilation study BJ-STU-002](../studies/BJ-STU-002_bay_ventilation_study.md): the fan moves 3.0 to 4.1 m3/h through the vents, which keeps the air around the board below its 60 deg C rating up to 41 deg C outside at the worst-case power of the board, 25 W held continuously.
+**Proof.** [Bay ventilation study BJ-STU-002](../studies/BJ-STU-002_bay_ventilation_study.md) compares three configurations. Vents only: the bay air runs 50 K above the outside air at average load. Fan under a grille with holes: 3.5 m3/h, sufficient in shade. Fan under seven slots, the design: 5.2 m3/h, which keeps the air around the board below its 60 deg C rating up to 47 deg C outside at the worst-case power of the board (25 W continuous), and up to 38 deg C in direct summer sun.
 
 **Record.** Purpose of the bay fan: D-011. Exhaust on one side and intake on the other: D-022. Number 21 in place of the side grilles, two roof grilles: D-063. All 12 November 2026.
 

@@ -9,7 +9,7 @@
 | Licence | CC BY 4.0, credit: Blackjack Rover by Alessandro Pistella, github.com/alepistella/blackjack |
 | Measurement records | RIL-004, RIL-011, RIL-057, RIL-072, RIL-073, RIL-074 |
 
-This study compares four architectures for powering the VENTUNO Q and the drivetrain with one switch. The direct branch is the simplest candidate. The shared output rating and the board’s behaviour below the published barrel-input range are the main constraints. The evidence consists of supplier documentation, schematic analysis and measurements from CAD.
+This study compares four architectures for powering the VENTUNO Q and the drivetrain with one switch. The direct branch is the simplest candidate. The shared output rating and the board's behaviour below the published barrel-input range are the main constraints. The evidence consists of supplier documentation, schematic analysis and measurements from CAD.
 
 ## Contents
 
@@ -100,7 +100,7 @@ All the current of the pack, charge and discharge, flows through R2: 0.1 ohm, 1%
 
 The INA219 full-scale shunt input is ±0.32 V at its widest setting (SRC-34). With a 0.1 Ω shunt, that corresponds to 3.2 A of measurement range. The schematic gives no power rating for R2. Continuous output capacity depends on the assembled module, including shunt dissipation, PCB heating, protection and the output connector. [INA219 datasheet](https://www.ti.com/lit/ds/symlink/ina219.pdf).
 
-The output is switched by one MOSFET, M3, and leaves through connector P3 (XH2.54, 2 pins). Waveshare lists 2 A for the retail module’s XH2.54 battery output. The link identifies the retail reference, pending identification of the module fitted to the rover. [Waveshare UPS Module 3S](https://www.waveshare.com/wiki/UPS_Module_3S#Interface_Definition). The overcurrent sense resistors are R21 and R22, 0.01 ohm 2512 each.
+The output is switched by one MOSFET, M3, and leaves through connector P3 (XH2.54, 2 pins). Waveshare lists 2 A for the retail module's XH2.54 battery output. The link identifies the retail reference, pending identification of the module fitted to the rover. [Waveshare UPS Module 3S](https://www.waveshare.com/wiki/UPS_Module_3S#Interface_Definition). The overcurrent sense resistors are R21 and R22, 0.01 ohm 2512 each.
 
 *Figure 2 (not reproduced here, see the cited source). Battery module, excerpt of SRC-30: M4 (ideal diode, marked OPTION), M3 (output switch), R39 1 M from gate to source, connector P4 "SWITCH" between the gate of M3 and ground, output P3 on net VBAT.*
 
@@ -118,7 +118,7 @@ Answer to question 3: a 3S LiPo ranges from 9.0 V (empty) to 12.6 V (full), the 
 
 ### 4.5 How Waveshare powers a Raspberry Pi 5 in the same rover
 
-The assembly video (SRC-32) shows the host mounted on the driver board’s 40-pin header, with no visible USB-C supply cable.
+The assembly video (SRC-32) shows the host mounted on the driver board's 40-pin header, with no visible USB-C supply cable.
 
 That matches the documents:
 
@@ -141,7 +141,7 @@ From SRC-01, chapters 3 and 4.3, and SRC-04, sheet 50:
 | Barrel jack 5.5 x 2.1 mm | 12 to 24 V | 5 A |
 | Screw terminal | 7 to 24 V | 10 A |
 
-On the schematic the barrel jack J5 and the screw terminal J8 are the same net, "7V-24V". The datasheet separately discusses the board’s 7 V startup floor and the power available through the jack at lower voltages. Its connector table specifies 12–24 V for the barrel jack. The common net explains the circuit arrangement. Operation down to the proposed low end of the 3S bus remains a design question under load.
+On the schematic the barrel jack J5 and the screw terminal J8 are the same net, "7V-24V". The datasheet separately discusses the board's 7 V startup floor and the power available through the jack at lower voltages. Its connector table specifies 12-24 V for the barrel jack. The common net explains the circuit arrangement. Operation down to the proposed low end of the 3S bus remains a design question under load.
 
 *Figure 5 (not reproduced here, see the cited source). VENTUNO Q, excerpt of SRC-04 sheet 50: barrel jack J5 and screw terminal J8 on the same net, TVS D5, power switch U15 (KTS1900) with MOSFET Q1 and Q2.*
 
@@ -254,9 +254,9 @@ The Raspberry Pi comparison uses nominal converter capacity. The VENTUNO Q colum
 
 The evidence supports the following conclusions for the candidate architectures.
 
-1. A direct barrel feed removes a converter from the branch. Qualification depends on connector fit and the board’s voltage and power limits (section 4.6).
+1. A direct barrel feed removes a converter from the branch. Qualification depends on connector fit and the board's voltage and power limits (section 4.6).
 2. A single switch for the whole rover needs no added electronics if the board is fed from the switched rail (way A of section 4.9). The cost is that the board's current passes the battery module, as the host's current does in the stock rover.
-3. The 33 W reference case alone exceeds the retail module’s documented 2 A output throughout the three voltage cases. Identify the installed module and apply its ratings to the combined load before retaining the stock path.
+3. The 33 W reference case alone exceeds the retail module's documented 2 A output throughout the three voltage cases. Identify the installed module and apply its ratings to the combined load before retaining the stock path.
 4. The CAD envelope provides a geometric upper bound for evaluating a larger pack. Packaging, protection, charging compatibility and the power path require a separate design review (section 4.10).
 5. The VENTUNO Q measures its own input current (INA232), and the driver board measures its own (INA219 at 0x42). These monitors can provide branch telemetry within their ranges. Bench instrumentation is needed to capture the shared output and fast transients.
 
@@ -269,7 +269,7 @@ Characterise the base configuration first. Repeat the load checks with RTK and L
 | Battery module identity | part marking, connectors P1..P4, value and size of the shunt |
 | Deck switch | latching or momentary, contacts, hole size |
 | Drivetrain load | Record idle, driving and controlled motor transients after confirming the permissible voltage and load limits. |
-| VENTUNO Q load | Characterise boot and the selected inference workload on a supply within the board’s published connector range. Use those traces to evaluate the candidate rail. |
+| VENTUNO Q load | Characterise boot and the selected inference workload on a supply within the board's published connector range. Use those traces to evaluate the candidate rail. |
 | Barrel interface | Identify the fitted jack. Check plug engagement and applicable contact ratings for the pair. |
 | VENTUNO Q residual current | disable pin low; after a 10 s press; after a shutdown from Linux |
 | Combined load | Measure shared output current and board input voltage during defined motor and inference events. Compare the traces with the installed hardware ratings and record any supply drop or reset. |
@@ -307,9 +307,9 @@ D-079 records the candidate for bench evaluation: a fused branch from P3 to barr
 
 ### 9.3 What the ratings say about the decision
 
-- The retail output rating, the connector catalogue rating and the current monitor range describe three different limits. The MOSFET’s datasheet current also depends on its mounting and temperature. Use the installed module rating for acceptance and evaluate shunt dissipation, voltage drop and temperature under the defined load.
+- The retail output rating, the connector catalogue rating and the current monitor range describe three different limits. The MOSFET's datasheet current also depends on its mounting and temperature. Use the installed module rating for acceptance and evaluate shunt dissipation, voltage drop and temperature under the defined load.
 - The Tensility drawing gives 8.5 A for the cable. That figure cannot establish the rating of the mated connection. Arduino lists a 5.5 × 2.1 mm barrel interface, while the jack identified in the STEP model is catalogued with a 2.0 mm centre pin. Confirm the fitted jack, plug engagement and contact ratings before selecting the harness.
-- The 12.6 V upper design case is 0.9 V below the motor driver IC’s 13.5 V operating maximum. Actual voltage at the driver during transients is part of the electrical check.
+- The 12.6 V upper design case is 0.9 V below the motor driver IC's 13.5 V operating maximum. Actual voltage at the driver during transients is part of the electrical check.
 
 ### 9.4 Plug in the model
 
