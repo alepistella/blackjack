@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
+      - name: Verify thermal study reference cases
+        run: node --test site/tests/thermal-model.test.cjs
       - name: Build real content only
         working-directory: site
         run: python3 build.py --production

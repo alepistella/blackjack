@@ -26,7 +26,7 @@ SPDX-License-Identifier = "Apache-2.0"
 
 # Website implementation, adopted from AP editorial kit 1.0
 [[annotations]]
-path = ["site/*.py", "site/figures/*.py", "site/assets/*.css", "site/assets/*.js", "site/templates/*.html", ".github/workflows/*.yml"]
+path = ["site/*.py", "site/figures/*.py", "site/tests/*.cjs", "site/assets/*.css", "site/assets/*.js", "site/templates/*.html", ".github/workflows/*.yml"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Alessandro Pistella"
 SPDX-License-Identifier = "Apache-2.0"

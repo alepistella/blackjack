@@ -9,6 +9,8 @@
 | Project | Blackjack Rover: rover for the Arduino VENTUNO Q on a Waveshare UGV02 chassis |
 | Licence | CC BY 4.0, credit: Blackjack Rover by Alessandro Pistella, github.com/alepistella/blackjack |
 
+> **Interactive companion:** [explore this model with adjustable heat, ambient temperature, grilles, fan and sun](https://alepistella.github.io/blackjack/blog/03-the-decisions-under-the-skin/#thermal-playground). The output is estimated bay air, not chip temperature.
+
 ## 1. Purpose
 
 I first had the perforated cover assessed without a bay fan. The predicted temperature rise was too high, so I had the same cover recalculated with a 40 mm fan. That gave enough airflow in shade, but the heat entering through the black cover in direct sun cut the margin at 25 W. The third calculation kept the fan and replaced the holes above it with seven slots. That is the layout I adopted for the BJ-P02 cover.
