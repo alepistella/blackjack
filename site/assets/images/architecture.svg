@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="656" viewBox="0 0 960 656" role="img" aria-labelledby="title desc">
+<title id="title">Blackjack system architecture</title>
+<desc id="desc">Linux runs ROS 2 and NPU inference. The first mechanical build includes antenna provisions. After base bring-up, Linux handles LTE and routes RTCM corrections to the ZED-F9P. The stock UGV02 controller handles motor drive. Dashed paths show the STM32H5 experiment: capture the GNSS time pulse and test a local heading loop with an independent IMU. Direct Linux control and STM32 control are separate test configurations.</desc>
+<!-- SPDX-FileCopyrightText: 2026 Alessandro Pistella; SPDX-License-Identifier: CC-BY-4.0 -->
+<defs>
+  <marker id="data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#79dbec"/></marker>
+  <marker id="experiment" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#ffc578"/></marker>
+</defs>
+<g font-family="Arial, Helvetica, sans-serif" fill="#f2f7fa">
+  <rect x="1" y="1" width="958" height="654" rx="22" fill="#101820" stroke="#38505e" stroke-width="2"/>
+  <text x="32" y="46" fill="#79dbec" font-size="18" font-weight="700" letter-spacing="2.5">TARGET ARCHITECTURE</text>
+  <text x="32" y="92" font-size="39" font-weight="700">Blackjack system architecture</text>
+  <g fill="#192630" stroke="#38505e" stroke-width="2">
+    <rect x="32" y="139" width="206" height="69" rx="12"/>
+    <rect x="32" y="238" width="206" height="69" rx="12"/>
+    <rect x="32" y="337" width="206" height="69" rx="12"/>
+    <rect x="735" y="473" width="193" height="98" rx="12"/>
+  </g>
+  <rect x="366" y="120" width="562" height="294" rx="15" fill="#13212b" stroke="#456775" stroke-width="2"/>
+  <rect x="366" y="473" width="276" height="98" rx="12" fill="#272520" stroke="#806846" stroke-width="2"/>
+  <text x="52" y="168" font-size="22" font-weight="700">Depth camera</text>
+  <text x="52" y="191" font-size="18" fill="#c4d3db">USB</text>
+  <text x="52" y="267" font-size="22" font-weight="700">GNSS RTK</text>
+  <text x="52" y="290" font-size="18" fill="#c4d3db">u-blox ZED-F9P</text>
+  <text x="52" y="366" font-size="22" font-weight="700">LTE Cat 1</text>
+  <text x="52" y="389" font-size="18" fill="#c4d3db">SIMCom SIM7672E</text>
+  <text x="32" y="434" font-size="17" fill="#c4d3db">RTK / LTE after base bring-up</text>
+  <text x="392" y="158" fill="#79dbec" font-size="18" font-weight="700" letter-spacing="1.6">VENTUNO Q / LINUX HOST</text>
+  <text x="392" y="195" font-size="31" font-weight="700">Dragonwing IQ8</text>
+  <text x="392" y="225" font-size="22" fill="#c4d3db">ROS 2 Jazzy</text>
+  <path d="M392 244 H901" stroke="#456775"/>
+  <g font-size="22">
+    <text x="392" y="278">Perception and NPU inference</text>
+    <text x="392" y="322">Localisation and NTRIP client</text>
+    <text x="392" y="366">ROS 2 drive commands and feedback</text>
+  </g>
+  <text x="385" y="503" fill="#ffc578" font-size="20" font-weight="700">VENTUNO Q / STM32H5</text>
+  <text x="385" y="532" font-size="19">GNSS pulse timestamping</text>
+  <text x="385" y="554" font-size="19">Heading loop + local IMU</text>
+  <text x="753" y="512" font-size="23" font-weight="700">Stock UGV02</text>
+  <text x="753" y="542" font-size="19" fill="#c4d3db">Motor controller</text>
+  <g fill="none" stroke="#79dbec" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M239 174 H366" marker-end="url(#data)"/>
+    <path d="M239 273 H366" marker-start="url(#data)" marker-end="url(#data)"/>
+    <path d="M239 372 H366" marker-start="url(#data)" marker-end="url(#data)"/>
+    <path d="M844 415 V472" marker-start="url(#data)" marker-end="url(#data)"/>
+  </g>
+  <g font-size="17" fill="#b9e7ef">
+    <text x="302" y="163" text-anchor="middle">Images</text>
+    <text x="302" y="258" text-anchor="middle">Fix / RTCM</text>
+    <text x="302" y="360" text-anchor="middle">IP link</text>
+    <text x="830" y="450" text-anchor="end">USB serial</text>
+  </g>
+  <g fill="none" stroke="#ffc578" stroke-width="3" stroke-dasharray="7 5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32 289 H17 V522 H366" marker-end="url(#experiment)"/>
+    <path d="M492 414 V472" marker-end="url(#experiment)"/>
+    <path d="M642 521 H734" marker-end="url(#experiment)"/>
+    <path d="M32 618 H77" marker-end="url(#experiment)"/>
+  </g>
+  <g fill="#ffc578" font-size="17">
+    <text x="276" y="511">GNSS PPS</text>
+    <text x="503" y="451">Setpoints</text>
+    <text x="688" y="507" text-anchor="middle">Speed</text>
+  </g>
+  <text x="89" y="624" fill="#c4d3db" font-size="18">STM32H5 experiment. One drive command source per test.</text>
+</g>
+</svg>

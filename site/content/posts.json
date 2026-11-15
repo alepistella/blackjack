@@ -1,0 +1,82 @@
+[
+  {
+    "slug": "01-a-bigger-question",
+    "title": "A small network. A bigger question.",
+    "date": "2026-11-15",
+    "category": "Integration",
+    "status": "Episode 01 / Design",
+    "summary": "From a neural-controller experiment to a physical AI rover: Arduino VENTUNO Q, Qualcomm Dragonwing IQ8 and Waveshare UGV02. The design decisions behind Blackjack.",
+    "tags": [
+      "episode-01",
+      "Arduino VENTUNO Q",
+      "Qualcomm Dragonwing IQ8",
+      "Waveshare UGV02",
+      "ROS 2"
+    ],
+    "body": "01-a-bigger-question.html",
+    "draft": false,
+    "demo": false,
+    "work_date": "2026-11-13",
+    "work_label": "Project start",
+    "seo_title": "Arduino VENTUNO Q rover design | Blackjack",
+    "updated": "2026-11-16"
+  },
+  {
+    "slug": "02-inside-blackjack",
+    "title": "Inside Blackjack: models, Qualcomm software and the robot.",
+    "date": "2026-11-15",
+    "category": "Integration",
+    "status": "Design selections",
+    "summary": "The Arduino VENTUNO Q software plan: App Lab, Qualcomm AI Hub, QNN and ROS 2 integration, the essential hardware, and a protocol for the first on-device measurements.",
+    "tags": [
+      "Arduino VENTUNO Q",
+      "Qualcomm Dragonwing IQ8",
+      "Waveshare UGV02",
+      "BOM"
+    ],
+    "body": "02-inside-blackjack.html",
+    "draft": false,
+    "demo": false,
+    "work_date": "2026-11-14",
+    "work_label": "Component selection",
+    "seo_title": "VENTUNO Q software: Qualcomm AI Hub, QNN & ROS 2 | Blackjack",
+    "updated": "2026-11-16"
+  },
+  {
+    "slug": "03-the-decisions-under-the-skin",
+    "title": "The decisions under the skin.",
+    "date": "2026-11-15",
+    "category": "Method",
+    "status": "CAD and analysis",
+    "summary": "Packaging, power and cooling for an Arduino VENTUNO Q on Waveshare UGV02: the calculations, Fusion design and verification gates behind Blackjack.",
+    "tags": [
+      "sheet metal",
+      "power",
+      "cooling"
+    ],
+    "body": "03-the-decisions-under-the-skin.html",
+    "draft": false,
+    "demo": false,
+    "work_date": "2026-11-15",
+    "work_label": "Design review",
+    "seo_title": "VENTUNO Q cooling, power & Fusion design | Blackjack",
+    "updated": "2026-11-16"
+  },
+  {
+    "slug": "04-the-weekly-build",
+    "title": "From a drawing to a robot, one week at a time.",
+    "date": "2026-11-15",
+    "category": "Method",
+    "status": "Proposed editorial plan",
+    "summary": "A weekly Arduino VENTUNO Q robot build on Waveshare UGV02: fabrication, ROS 2, Qualcomm Dragonwing IQ8 inference and experiments in physical AI.",
+    "tags": [
+      "timeline",
+      "weekly series",
+      "milestones"
+    ],
+    "body": "04-the-weekly-build.html",
+    "draft": false,
+    "demo": false,
+    "seo_title": "Arduino VENTUNO Q robot build timeline | Blackjack"
+  }
+]

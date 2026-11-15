@@ -1,0 +1,23 @@
+/* Shared semantic tokens. Never hard-code a project colour inside components. */
+:root {
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-body: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+  --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem;
+  --space-6: 1.5rem; --space-8: 2rem; --space-12: 3rem; --space-16: 4rem; --space-24: 6rem;
+  --radius: 6px; --max-width: 1220px; --prose-width: 70ch;
+}
+:root, [data-theme="tactical-dark"] {
+  color-scheme: dark;
+  --bg: #111714; --surface: #19211d; --surface-raised: #222d26;
+  --text: #e1e7df; --muted: #a9b5ac; --line: #3a4b40;
+  --danger: #e69b99; --accent: #ec956b; --signal: #b0c98a; --link: #bad2b7;
+  --highlight: #35432a; --code-bg: #0c120f; --focus: #efba78;
+}
+[data-theme="field-light"] {
+  color-scheme: light;
+  --bg: #fafbf5; --surface: #edf2e3; --surface-raised: #e3ebd9;
+  --text: #233d39; --muted: #5c6f68; --line: #b5c4ae;
+  --danger: #a32b32; --accent: #a64121; --signal: #205a49; --link: #205a49;
+  --highlight: #e0f09b; --code-bg: #eaf0e2; --focus: #8d3d23;
+}

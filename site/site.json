@@ -1,0 +1,48 @@
+{
+  "name": "Blackjack",
+  "wordmark_image": "assets/images/blackjack-lettering.png",
+  "wordmark_alt": "BLACKJACK",
+  "author": "Alessandro Pistella",
+  "theme": "tactical-dark",
+  "url": "https://alepistella.github.io/blackjack",
+  "repository": "https://github.com/alepistella/blackjack",
+  "linkedin": "https://linkedin.com/in/apistella",
+  "description": "Blackjack by Alessandro Pistella: embodied AI with Arduino VENTUNO Q, Qualcomm Dragonwing IQ8, App Lab and ROS 2 on Waveshare UGV02. Architecture and measured experiments.",
+  "eyebrow": "BLACKJACK / ARDUINO VENTUNO Q ROBOTICS",
+  "headline": "From neural models\nto physical action.",
+  "intro": "What does useful onboard intelligence look like when models, robotics software and real hardware have to work as one system?",
+  "status": "Episode 01 / System architecture and design",
+  "hero_image": "assets/images/blackjack-rover.jpg",
+  "hero_alt": "CAD-based render of Blackjack on its UGV02 chassis, with the optional roof turret",
+  "hero_caption": "Blackjack design render, shown with the optional turret. Hardware procurement is next.",
+  "about": "Blackjack is my systems-engineering project for embodied AI: select useful pretrained models, deploy them through the Qualcomm and Arduino ecosystem, connect them to a robot, and measure the complete behaviour. Arduino VENTUNO Q brings Qualcomm Dragonwing IQ8 and an STM32H5F5 together; Waveshare UGV02 provides the mobile platform. ROS 2 gives the experiments a common interface and a conventional baseline. The investigation spans perception, language, context and bounded autonomous action, with latency, energy and thermal behaviour recorded alongside task outcomes.",
+  "bio": "Technology executive and engineer with twenty years in software and technology. My role in Blackjack is system architecture and technical direction: connect the use case to a compute platform, define the software and hardware boundaries, make the trade-offs, and turn each experiment into evidence for the next decision. I own the integration from model deployment to physical behaviour. Robotics is also where I keep exploring and having fun.",
+  "related": [
+    {
+      "name": "dum-e",
+      "url": "https://alepistella.github.io/dum-e/",
+      "description": "Embedded control, ROS 2 and autonomy."
+    }
+  ],
+  "review_preview": true,
+  "seo_title": "Blackjack | Arduino VENTUNO Q robot, Qualcomm & Waveshare",
+  "author_github": "https://github.com/alepistella",
+  "topics": [
+    {
+      "name": "Arduino VENTUNO Q",
+      "url": "https://docs.arduino.cc/hardware/ventuno-q/"
+    },
+    {
+      "name": "Qualcomm Dragonwing IQ8",
+      "url": "https://www.qualcomm.com/news/releases/2026/03/arduino-announces-arduino-ventuno-q----powered-by-qualcomm-drago"
+    },
+    {
+      "name": "Waveshare UGV02",
+      "url": "https://www.waveshare.com/wiki/UGV02"
+    },
+    {
+      "name": "ROS 2",
+      "url": "https://docs.ros.org/"
+    }
+  ]
+}

@@ -49,3 +49,17 @@ path = ["site/assets/images/fig*.png", "site/assets/images/rear-plate-flat-trial
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Alessandro Pistella"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+# Original Arduino documentation illustrations, with attribution in captions.
+[[annotations]]
+path = ["site/assets/images/arduino-applab-interface.png", "site/assets/images/arduino-applab-models.png"]
+precedence = "closest"
+SPDX-FileCopyrightText = "Arduino"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+# Technical-review capture: upstream source and host interface retain their rights.
+[[annotations]]
+path = ["site/assets/images/qrb-supported-targets-000e897.jpg", "site/assets/data/qrb-screenshot-notice.txt"]
+precedence = "closest"
+SPDX-FileCopyrightText = ["2024 Qualcomm Innovation Center, Inc.", "GitHub interface: GitHub, Inc.", "2026 Alessandro Pistella (screen capture)"]
+SPDX-License-Identifier = "LicenseRef-Technical-Review-Capture"

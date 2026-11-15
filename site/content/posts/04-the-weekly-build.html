@@ -1,0 +1,143 @@
+<h2 id="a-visible-step">One week. Something worth showing.</h2>
+<p>Blackjack asks what neural intelligence can do with a physical body and the hardware to operate efficiently. The first chapter builds that platform around Arduino VENTUNO Q, Qualcomm Dragonwing IQ8 and Waveshare UGV02, then establishes its basic capabilities. Each episode has a visible outcome and an engineering question underneath it. Movement, sensing and navigation create the conditions for later experiments in interaction, context, reasoning and autonomous action.</p>
+<p>The fourteen slots below propose a starting sequence. They take us into the first experiments; the project can keep growing as the results suggest new questions. A controller comparison is one useful test within that larger exploration.</p>
+<p>This is the proposed editorial sequence as of <strong>15 November 2026</strong>. Episode 01 occupies the editorial week of 9–15 November, with the project started on Friday 13 November; episode 02 is planned for 16–22 November. Later slots are targets rather than delivery promises. Component availability, fabrication and bring-up determine when the physical milestones can happen. December and early January include deliberate room for holiday closures.</p>
+<h2 id="the-route-at-a-glance">The route at a glance.</h2>
+<figure class="schedule-figure"><div class="schedule-heading"><span class="kicker">Chapter one / Proposed weekly sequence</span><span class="schedule-now">01 / Current episode</span></div><ol class="phase-route" aria-label="Graphical sequence of project phases"><li><span class="phase-node" aria-hidden="true">01</span><a href="#episode-01"><span class="kicker">Episodes 01–05 / 9 Nov–13 Dec</span><strong>Build the platform</strong><span>Design, orders, measured fit, enclosure and first power-on.</span></a></li><li><span class="phase-node" aria-hidden="true">02</span><a href="#episode-06"><span class="kicker">Episodes 06–08 / 14 Dec–3 Jan</span><strong>Commission the robot</strong><span>Movement, depth perception and thermal checks. Flexible holiday slots.</span></a></li><li><span class="phase-node" aria-hidden="true">03</span><a href="#episode-09"><span class="kicker">Episodes 09–10 / 4–17 Jan</span><strong>Establish navigation</strong><span>Mapping and a recorded navigation baseline.</span></a></li><li><span class="phase-node" aria-hidden="true">04</span><a href="#episode-11"><span class="kicker">Episodes 11–12 / 18–31 Jan</span><strong>Test neural behaviour</strong><span>Onboard inference and a bounded neural-control comparison.</span></a></li><li><span class="phase-node" aria-hidden="true">05</span><a href="#episode-13"><span class="kicker">Episodes 13–14 / 1–14 Feb</span><strong>Extend the questions</strong><span>Outdoor positioning and a first scene-to-action interaction.</span></a></li></ol><div class="schedule-scroll" tabindex="0" role="region" aria-label="Fourteen-week graphical plan, scroll horizontally on smaller screens"><div class="schedule-grid"><div class="schedule-axis">Episode →</div>
+<a class="schedule-week" href="#episode-01" title="Week 1: 2026-11-09 to 2026-11-15">01</a>
+<a class="schedule-week" href="#episode-02" title="Week 2: 2026-11-16 to 2026-11-22">02</a>
+<a class="schedule-week" href="#episode-03" title="Week 3: 2026-11-23 to 2026-11-29">03</a>
+<a class="schedule-week" href="#episode-04" title="Week 4: 2026-11-30 to 2026-12-06">04</a>
+<a class="schedule-week" href="#episode-05" title="Week 5: 2026-12-07 to 2026-12-13">05</a>
+<a class="schedule-week" href="#episode-06" title="Week 6: 2026-12-14 to 2026-12-20">06</a>
+<a class="schedule-week" href="#episode-07" title="Week 7: 2026-12-21 to 2026-12-27">07</a>
+<a class="schedule-week" href="#episode-08" title="Week 8: 2026-12-28 to 2027-01-03">08</a>
+<a class="schedule-week" href="#episode-09" title="Week 9: 2027-01-04 to 2027-01-10">09</a>
+<a class="schedule-week" href="#episode-10" title="Week 10: 2027-01-11 to 2027-01-17">10</a>
+<a class="schedule-week" href="#episode-11" title="Week 11: 2027-01-18 to 2027-01-24">11</a>
+<a class="schedule-week" href="#episode-12" title="Week 12: 2027-01-25 to 2027-01-31">12</a>
+<a class="schedule-week" href="#episode-13" title="Week 13: 2027-02-01 to 2027-02-07">13</a>
+<a class="schedule-week" href="#episode-14" title="Week 14: 2027-02-08 to 2027-02-14">14</a>
+<div class="schedule-phase" style="grid-row:2"><strong>Build the platform</strong><small>9 Nov–13 Dec</small></div>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:2"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:3"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:4"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:5"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:6"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:7"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:8"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:9"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:10"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:11"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:12"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:13"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:14"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:2;grid-column:15"></span>
+<a class="schedule-bar" href="#episode-01" style="grid-row:2;grid-column:2 / span 5"><span>01–05</span><strong>Build the platform</strong></a>
+<div class="schedule-phase" style="grid-row:3"><strong>Commission the robot</strong><small>14 Dec–3 Jan</small></div>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:2"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:3"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:4"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:5"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:6"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:7"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:8"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:9"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:10"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:11"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:12"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:13"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:14"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:3;grid-column:15"></span>
+<a class="schedule-bar" href="#episode-06" style="grid-row:3;grid-column:7 / span 3"><span>06–08</span><strong>Commission the robot</strong></a>
+<div class="schedule-phase" style="grid-row:4"><strong>Establish navigation</strong><small>4–17 Jan</small></div>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:2"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:3"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:4"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:5"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:6"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:7"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:8"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:9"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:10"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:11"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:12"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:13"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:14"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:4;grid-column:15"></span>
+<a class="schedule-bar" href="#episode-09" style="grid-row:4;grid-column:10 / span 2"><span>09–10</span><strong>Establish navigation</strong></a>
+<div class="schedule-phase" style="grid-row:5"><strong>Test neural behaviour</strong><small>18–31 Jan</small></div>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:2"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:3"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:4"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:5"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:6"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:7"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:8"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:9"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:10"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:11"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:12"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:13"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:14"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:5;grid-column:15"></span>
+<a class="schedule-bar" href="#episode-11" style="grid-row:5;grid-column:12 / span 2"><span>11–12</span><strong>Test neural behaviour</strong></a>
+<div class="schedule-phase" style="grid-row:6"><strong>Extend the questions</strong><small>1–14 Feb</small></div>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:2"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:3"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:4"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:5"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:6"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:7"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:8"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:9"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:10"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:11"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:12"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:13"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:14"></span>
+<span class="schedule-cell" aria-hidden="true" style="grid-row:6;grid-column:15"></span>
+<a class="schedule-bar" href="#episode-13" style="grid-row:6;grid-column:14 / span 2"><span>13–14</span><strong>Extend the questions</strong></a>
+</div></div><figcaption>Five phases organise fourteen weekly slots. Select a phase or numbered milestone to reach its episode details. Dates are proposed slots; delivery and verification gates can move them. The final slot opens further experiments.</figcaption></figure><ol class="milestone-map" aria-label="Select a weekly milestone">
+<li><a href="#episode-01" aria-current="step"><span class="milestone-number">01</span><span><strong>Design &amp; reveal</strong><small>09 Nov / This week</small></span><span aria-hidden="true">↘</span></a></li>
+<li><a href="#episode-02"><span class="milestone-number">02</span><span><strong>Orders &amp; release</strong><small>16 Nov</small></span><span aria-hidden="true">↘</span></a></li>
+<li><a href="#episode-03"><span class="milestone-number">03</span><span><strong>Measure the parts</strong><small>23 Nov</small></span><span aria-hidden="true">↘</span></a></li>
+<li><a href="#episode-04"><span class="milestone-number">04</span><span><strong>Cut, bend, fit</strong><small>30 Nov</small></span><span aria-hidden="true">↘</span></a></li>
+<li><a href="#episode-05"><span class="milestone-number">05</span><span><strong>First power-on</strong><small>07 Dec</small></span><span aria-hidden="true">↘</span></a></li>
+<li><a href="#episode-06"><span class="milestone-number">06</span><span><strong>First movement</strong><small>14 Dec</small></span><span aria-hidden="true">↘</span></a></li>
+<li><a href="#episode-07"><span class="milestone-number">07</span><span><strong>Depth perception</strong><small>21 Dec</small></span><span aria-hidden="true">↘</span></a></li>
+<li><a href="#episode-08"><span class="milestone-number">08</span><span><strong>Thermal check</strong><small>28 Dec</small></span><span aria-hidden="true">↘</span></a></li>
+<li><a href="#episode-09"><span class="milestone-number">09</span><span><strong>Build a map</strong><small>04 Jan</small></span><span aria-hidden="true">↘</span></a></li>
+<li><a href="#episode-10"><span class="milestone-number">10</span><span><strong>Navigate to a goal</strong><small>11 Jan</small></span><span aria-hidden="true">↘</span></a></li>
+<li><a href="#episode-11"><span class="milestone-number">11</span><span><strong>Onboard inference</strong><small>18 Jan</small></span><span aria-hidden="true">↘</span></a></li>
+<li><a href="#episode-12"><span class="milestone-number">12</span><span><strong>Neural control test</strong><small>25 Jan</small></span><span aria-hidden="true">↘</span></a></li>
+<li><a href="#episode-13"><span class="milestone-number">13</span><span><strong>Outdoor positioning</strong><small>01 Feb</small></span><span aria-hidden="true">↘</span></a></li>
+<li><a href="#episode-14"><span class="milestone-number">14</span><span><strong>Scene to action</strong><small>08 Feb</small></span><span aria-hidden="true">↘</span></a></li>
+</ol><div class="continuation-note"><span class="kicker">The exploration continues →</span><p>Interaction. Useful context. Task planning. Responses to unexpected outcomes. Results from the first chapter help choose what comes next.</p></div>
+<h2 id="the-episodes">The first chapter.</h2>
+<div class="episode-list">
+<section class="episode" id="episode-01"><div class="kicker">01 / 9–15 November 2026 / This episode</div><h3>A small network. A bigger question.</h3><p><strong>On screen:</strong> the design film, exploded assembly and the design decisions that changed the rover’s shape.</p><p><strong>Work:</strong> platform selection, CAD, power and ventilation studies, trial flat patterns and draft BOM. <strong>Milestone:</strong> presentation package ready for review; fabrication release still ahead.</p><a href="../01-a-bigger-question/index.html">Read episode 01 ↗</a></section>
+<section class="episode" id="episode-02"><div class="kicker">02 / 16–22 November / Planned</div><h3>From a model to an order.</h3><p><strong>On screen:</strong> a flat blank folding into the cover, the selected parts laid out in an annotated assembly, and the order configuration.</p><p><strong>Work:</strong> confirm stock and delivery dates, close order-critical BOM items, finish the support details and review drawings with the bending shop. Place the hardware orders; release metalwork only after its design gate. <strong>Milestone:</strong> an order record and a fabrication plan, with open items identified.</p></section>
+<section class="episode" id="episode-03"><div class="kicker">03 / 23–29 November / Delivery-dependent</div><h3>Will the drawing fit the part?</h3><p><strong>On screen:</strong> unboxing, caliper close-ups and an overlay of CAD against the real deck and computer.</p><p><strong>Work:</strong> inspect delivered items, verify mounting geometry, connectors and the installed power module. <strong>Milestone:</strong> measured interfaces, with corrections made before committing the fit. If delivery slips, show the full-scale packaging check and shop feedback; keep the hardware comparison for its arrival.</p></section>
+<section class="episode" id="episode-04"><div class="kicker">04 / 30 November–6 December / After fabrication review</div><h3>A flat sheet becomes Blackjack.</h3><p><strong>On screen:</strong> cutting or the received blanks, bending, finish and the first dry assembly. Film the shop process where access allows it.</p><p><strong>Work:</strong> inspect bends, hole alignment, tool access and cable routes. <strong>Milestone:</strong> an enclosure that fits the delivered hardware. A rework becomes the episode’s before-and-after, with the cause shown.</p></section>
+<section class="episode" id="episode-05"><div class="kicker">05 / 7–13 December / After parts and fit</div><h3>The first power-on.</h3><p><strong>On screen:</strong> the assembled harness, the switch, first boot and a live power trace as loads are introduced.</p><p><strong>Work:</strong> establish an acceptable supply path, protections and shutdown behaviour; log computer and drive demand. <strong>Milestone:</strong> repeatable power-up and a documented power configuration. A revised supply is shown if the stock shared path is unsuitable.</p></section>
+<section class="episode" id="episode-06"><div class="kicker">06 / 14–20 December / After power checks</div><h3>Blackjack moves.</h3><p><strong>On screen:</strong> first teleoperated drive, straight runs, controlled turns and an odometry overlay.</p><p><strong>Work:</strong> ROS 2 host setup, base interface, encoder and IMU feedback, command expiry and stop behaviour. <strong>Milestone:</strong> controlled movement with usable logs.</p></section>
+<section class="episode" id="episode-07"><div class="kicker">07 / 21–27 December / Flexible holiday episode</div><h3>A rover’s view of the room.</h3><p><strong>On screen:</strong> ordinary video beside depth, with familiar objects at different distances.</p><p><strong>Work:</strong> camera streaming, mounting and useful-range checks. If the camera is delayed, use a tabletop walk-through of its mounting and planned test scene. <strong>Milestone:</strong> an explained perception setup; validated streams only when recorded on the hardware.</p></section>
+<section class="episode" id="episode-08"><div class="kicker">08 / 28 December–3 January 2027 / Flexible holiday episode</div><h3>What the finished shell changes.</h3><p><strong>On screen:</strong> airflow paths, the revised grille and a thermal trace during a representative workload.</p><p><strong>Work:</strong> compare model and measurement, cable dressing and enclosure serviceability. <strong>Milestone:</strong> an initial measured thermal envelope, or a visual design-review episode if hardware testing is not yet possible.</p></section>
+<section class="episode" id="episode-09"><div class="kicker">09 / 4–10 January / After motion and sensing</div><h3>The room becomes a map.</h3><p><strong>On screen:</strong> the rover exploring while the map grows beside the camera view.</p><p><strong>Work:</strong> verify transforms, select a supported mapping sensor path, integrate mapping and inspect turn-induced odometry error. <strong>Milestone:</strong> a recorded map with its sensor configuration. The optional lidar is added only after its integration checks.</p></section>
+<section class="episode" id="episode-10"><div class="kicker">10 / 11–17 January / After mapping and localisation</div><h3>Give it a destination.</h3><p><strong>On screen:</strong> choose a goal, watch the path and follow the physical rover through a repeatable route.</p><p><strong>Work:</strong> conventional navigation baseline, obstacle response, stop and recovery handling. <strong>Milestone:</strong> a recorded task with completion criteria and failures retained.</p></section>
+<section class="episode" id="episode-11"><div class="kicker">11 / 18–24 January / After camera and runtime bring-up</div><h3>Inference leaves the desk.</h3><p><strong>On screen:</strong> detections on the rover’s own camera feed, then the same workload with inference enabled and disabled.</p><p><strong>Work:</strong> deploy a suitable supported model to the Qualcomm Dragonwing IQ8 NPU on Arduino VENTUNO Q, publish results into ROS 2, record image-to-result latency and input power. <strong>Milestone:</strong> useful inference alongside the running robot stack.</p></section>
+<section class="episode" id="episode-12"><div class="kicker">12 / 25–31 January / After the baseline</div><h3>Can a network take the wheel?</h3><p><strong>On screen:</strong> the conventional controller and a neural policy facing the same bounded task, with paired routes.</p><p><strong>Work:</strong> choose one responsibility to substitute, keep the remaining interfaces fixed, define comparable starts and stop rules. <strong>Milestone:</strong> a documented comparison, whatever the outcome. This is an experiment, not a promised capability.</p></section>
+<section class="episode" id="episode-13"><div class="kicker">13 / 1–7 February / Extension</div><h3>Outside, with a better position.</h3><p><strong>On screen:</strong> the GNSS antenna installation and a route trace alongside correction age and fix state.</p><p><strong>Work:</strong> commission the ZED-F9P and LTE route, verify corrections and frame integration. <strong>Milestone:</strong> recorded outdoor positioning under stated conditions. Satellite view and correction service availability govern the test.</p></section>
+<section class="episode" id="episode-14"><div class="kicker">14 / 8–14 February / Extension and review</div><h3>What can it do with what it sees?</h3><p><strong>On screen:</strong> a first bounded interaction connecting an instruction, an observed scene and a visible response. Choose the task after the perception and model-runtime experiments establish what is practical.</p><p><strong>Work:</strong> explore a supported language or vision-language model and a defined route from its output to the robot’s existing actions. Record the instruction, observations, response and outcome. <strong>Milestone:</strong> an inspectable first interaction, or a concrete account of the constraint that prevented it. This episode opens the next set of questions.</p></section>
+</div>
+<h2 id="beyond-the-first-chapter">Where the experiments could lead.</h2>
+<p>Once the robot can sense and act reliably, I want to explore what it can do with those abilities together. Possible episodes include interpreting a request in the context of the room, remembering a useful observation across interactions, breaking a task into steps, and responding when an action produces an unexpected result. We can then ask how those behaviours change with the model, the available context and the compute budget.</p>
+<p>Voice, camera, mobility and the optional turret offer different ways to make those questions visible. The STM32H5F5 offers a separate path for experiments in real-time control. The choice of each next experiment should follow the evidence and the most interesting unanswered question. This is an open research direction for the project, with each individual test given a clear task and observable outcome.</p>
+<h2 id="what-moves-the-calendar">What moves the calendar.</h2>
+<p>Hardware arrival gates fit checks. Fit and the shop review gate the metalwork. A verified supply gates powered integration. Teleoperation and sensor streams gate mapping and navigation. The conventional navigation baseline comes before a neural-control comparison. Positioning and microcontroller experiments can move independently once the base works.</p>
+<p>If a milestone slips, the next weekly release can show a complete smaller question: a connector clearance, a failed fold, a current-path revision or a sensor blind spot. A short episode with a clear outcome is preferable to pretending that a stage has passed. Later episode dates shift with the engineering sequence.</p>
+<h2 id="the-video-format">A format that keeps the robot in view.</h2>
+<p>Each main video can run roughly two to four minutes: open with the visible result, explain the question, show one consequential choice, then return to the result and the next test. A short social cut can use the same reveal or comparison in thirty to forty-five seconds. These are editorial targets, not fixed runtimes.</p>
+<p>The companion page carries the diagrams, measurements and source links. Code appears when it explains a behaviour on screen. The reader who wants to inspect the implementation can go deeper without turning every episode into a terminal recording.</p>
+<div class="evidence-links"><a href="../01-a-bigger-question/index.html">Start with episode 01 ↗</a><a href="https://github.com/alepistella/blackjack/blob/main/ROADMAP.md">Engineering milestones ↗</a></div>

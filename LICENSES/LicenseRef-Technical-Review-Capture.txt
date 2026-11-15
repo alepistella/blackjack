@@ -1,0 +1,6 @@
+This screen capture is reproduced as a sourced technical-review excerpt.
+The captured Qualcomm source text is available under the BSD 3-Clause License;
+its complete notice is supplied in site/assets/data/qrb-screenshot-notice.txt.
+The GitHub interface and trademarks retain their respective owners' rights.
+This identifier does not purport to grant a licence to those interface elements.
+The author claims no endorsement or affiliation with the source or host.

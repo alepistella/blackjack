@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" data-theme="$theme">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="author" content="$author">
+  <title>$title</title><meta name="description" content="$description">
+  <meta name="color-scheme" content="$color_scheme"><meta name="theme-color" content="$theme_color">
+  <link rel="canonical" href="$canonical">
+  <meta property="og:site_name" content="$name / Engineering notebook">
+  <meta property="og:type" content="$og_type"><meta property="og:title" content="$title">
+  <meta property="og:description" content="$description"><meta property="og:url" content="$canonical">
+  <meta property="og:image" content="$social_image"><meta property="og:image:alt" content="$social_alt">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="$title"><meta name="twitter:description" content="$description"><meta name="twitter:image" content="$social_image"><meta name="twitter:image:alt" content="$social_alt">
+  <link rel="icon" href="${root}assets/favicon.svg">
+  <link rel="stylesheet" href="${root}assets/style.css?v=20261116-stack">
+  <link rel="alternate" type="application/rss+xml" title="$name notes" href="${root}feed.xml">
+  <script defer src="${root}assets/site.js"></script>
+  $interactive_assets
+  $structured_data
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="masthead">
+      <a class="brand" href="${root}index.html">$brand_markup<small>ENGINEERING NOTEBOOK</small></a>
+      <nav aria-label="Main"><a href="${root}blog/01-a-bigger-question/index.html">Episode 01</a><a href="${root}blog/04-the-weekly-build/index.html">Timeline</a><a href="${root}blog/index.html">Notebook</a><a href="$repository">GitHub ↗</a></nav>
+    </header>
+    $preview_banner
+    <main id="main">$content</main>
+    <aside class="related" aria-label="Project evidence and related work"><span class="kicker">Open the engineering record</span><a href="$repository">Blackjack repository ↗</a><span class="caption">Sources, design rationale, studies and revisions.</span><span class="kicker">Related project</span>$related</aside>
+    <footer class="site-footer"><a class="brand" href="${root}index.html">$brand_markup</a><p>A project by $author.</p><nav aria-label="Footer"><a href="$repository">Blackjack on GitHub ↗</a><a href="$linkedin">LinkedIn ↗</a><a href="${root}feed.xml">RSS</a>$reference_link</nav></footer>
+  </div>
+</body>
+</html>
