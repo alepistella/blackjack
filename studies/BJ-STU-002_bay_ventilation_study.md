@@ -1,30 +1,28 @@
-# BJ-STU-002 - Bay ventilation study: fan, vents and temperature of the VENTUNO Q bay
+# BJ-STU-002 - Ventilation study for the VENTUNO Q enclosure
 
 | | |
 |---|---|
 | Document | BJ-STU-002 |
-| Revision | B |
+| Revision | C |
 | Date | 15 November 2026 |
-| Status | Released for publication by Alessandro Pistella |
+| Status | Design analysis; hardware validation pending |
 | Project | Blackjack Rover: rover for the Arduino VENTUNO Q on a Waveshare UGV02 chassis |
-| Requested by | Alessandro Pistella |
-| Prepared by | Alessandro Pistella, with AI agents working under written rules |
 | Licence | CC BY 4.0, credit: Blackjack Rover by Alessandro Pistella, github.com/alepistella/blackjack |
 
 ## 1. Purpose
 
-The cover of Blackjack Rover encloses the Arduino VENTUNO Q. This study shows that the ventilation designed into the cover (one 40 mm fan under a slotted roof vent, a second roof grille, the front grille and the number 21 cut through the side walls) keeps the air around the board inside the temperature rating of the board, and with what margin.
+I first had the perforated cover assessed without a bay fan. The predicted temperature rise was too high, so I had the same cover recalculated with a 40 mm fan. That gave enough airflow in shade, but the heat entering through the black cover in direct sun cut the margin at 25 W. The third calculation kept the fan and replaced the holes above it with seven slots. That is the layout I adopted for the BJ-P02 cover.
 
-**Result.** Three configurations are compared: vents only, a fan under a grille with holes, the same fan under slots. Vents alone leave the bay air 50 K above the outside air. The fan under holes passes 3.5 m3/h and is sufficient in shade. The fan under slots, which is the design, passes 5.2 m3/h: at the worst-case power of the board, 25 W held continuously, the air around the board stays inside its 60 deg C rating up to 47 deg C outside in shade and 38 deg C in direct summer sun.
+The study uses 60 °C, the board's upper operating temperature rating, as a limit for the air around its heatsink. The results are steady-state estimates used to select the cover geometry. The temperature at the heatsink inlet and the behaviour of the SoM under sustained load still need to be checked on the rover.
 
 ## 2. Sources
 
 | ID | Source | Used for |
 |---|---|---|
-| SRC-01 | Arduino VENTUNO Q data sheet ABX00181, 62 pages, "Modified: 12/11/2026": ratings table, power consumption table, section 12.1 "SoM Heatsink & Thermal Design" | heat to remove, temperature rating |
-| SRC-N07 | Noctua, NF-A4x10 5V PWM specification page, noctua.at/en/products/fan/nf-a4x10-5v-pwm/specification, read on 15 November 2026 | fan end points |
+| SRC-01 | [Arduino VENTUNO Q data sheet ABX00181](https://docs.arduino.cc/resources/datasheets/ABX00181-datasheet.pdf), 62 pages, "Modified: 12/11/2026": ratings table, power consumption table, section 12.1 "SoM Heatsink & Thermal Design" | heat to remove, temperature rating |
+| SRC-N07 | Noctua, [NF-A4x10 5V PWM specifications](https://noctua.at/en/products/fan/nf-a4x10-5v-pwm/specification), read on 15 November 2026 (page not archived) | fan end points |
 | RIL-084, RIL-085 | Measurements on the CAD model, Fusion document "Blackjack_B", 15 November 2026 | free areas of the openings with holes and with slots, surface of the cover |
-| [1] | I. E. Idelchik, Handbook of Hydraulic Resistance, perforated plates and orifices | loss coefficients |
+| [1] | I. E. Idelchik, Handbook of Hydraulic Resistance, perforated plates and orifices (working reference) | loss coefficient assumption |
 
 Third-party documents are cited, not reproduced. Identifiers RIL-nnn and D-nnn refer to the measurement and decision registers of the project.
 
@@ -34,159 +32,135 @@ Third-party documents are cited, not reproduced. Identifiers RIL-nnn and D-nnn r
 
 | Condition of the VENTUNO Q | Power | Source |
 |---|---|---|
-| Average, "Edge AI Assistant" example | 13.5 W | SRC-01, power table at 12 V, measured by Arduino at 24.4 deg C ambient |
+| Average, "Edge AI Assistant" example | 13.5 W | SRC-01, power table at 12 V, measured by Arduino at 24.4 °C ambient |
 | Average, "Smart Mirror" example | 14.7 W | same |
 | Worst case, MPU, NPU and GPU together at full performance | about 25 W | SRC-01, section 12.1, page 51 |
 | Highest instantaneous value in the table | 33.0 W | SRC-01, power table at 12 V |
 
-The board is rated for operation from -10 to 60 deg C (SRC-01, ratings table, symbol TOP). Its SoM has its own heatsink and fan, sized by Arduino for the 25 W case (SRC-01, section 12.1). The cover therefore has one job: keep the air around the board below 60 deg C. The study uses five load cases: 15 W (average workload), 20 W, 25 W (worst case stated by Arduino, taken as continuous), 30 W and 33 W (the instantaneous maximum, taken as continuous, which it is not).
-
-The bay fan adds 0.35 W at most (SRC-N07) and is included in the cases above.
+The board is rated for operation from -10 to 60 °C (SRC-01, ratings table, symbol TOP). Its SoM has its own heatsink and fan. The calculation uses 15 W as a representative load, rounded from the examples above, and 25 W as a sustained design case based on the SoM thermal guidance. These are imposed heat loads for the bay. The installed board, fan and any peripherals must be checked against that heat budget; the bay fan alone is rated at up to 0.35 W (SRC-N07). The 33 W transient in the power table is not used as a sustained thermal load.
 
 ### 3.2 Bay fan
 
-Noctua NF-A4x10 5V PWM, 40 x 40 x 10 mm (SRC-N07): maximum air flow 8.9 m3/h, maximum static pressure 1.95 mm H2O (19.1 Pa), 5000 rpm, 19.6 dB(A), input power 0.35 W maximum. The manufacturer publishes these two end points and not the full curve.
+Noctua NF-A4x10 5V PWM, 40 x 40 x 10 mm (SRC-N07): maximum air flow 8.9 m³/h, maximum static pressure 1.95 mm H2O (19.1 Pa), 5000 rpm, 19.6 dB(A), input power 0.35 W maximum. The manufacturer publishes these two end points and not the full curve.
 
 ### 3.3 Openings of the cover
 
-Measured on the CAD model, body "BJ-P02 concept v0.31" of the Fusion document "Blackjack_B" version 51, by rebuilding every inner loop of every planar face as a face and reading its area (records RIL-084 and RIL-085).
+Opening areas come from the `Blackjack_B` CAD model. RIL-084 records the perforated cover (BJ-P02 v0.31); RIL-085 records the slotted grille introduced in v0.32. Areas are the open cutouts in the sheet, before allowing for discharge losses.
 
 | Opening | Geometry | Free area |
 |---|---|---|
-| Roof grille B, above the bay fan, with holes | 37 holes dia 3.5 mm at 5 mm pitch inside a 38 mm circle | 356 mm2 |
-| Roof grille B, with slots (cover v0.32) | 7 slots 3.5 mm wide, 2 mm apart, inside the same circle | 667 mm2 |
-| Roof grille A, above the heatsink | same | 356 mm2 |
-| Number 21, two side walls | digit "2" 315 mm2 and digit "1" 170 mm2 on each wall | 970 mm2 |
-| Front grille, inclined front wall | 16 slats 3.2 mm wide | 1258 mm2 |
-| Vent path other than grille B | A + 21 + front | 2584 mm2 |
+| Roof grille B, above the bay fan, with holes | 37 holes dia 3.5 mm at 5 mm pitch inside a 38 mm circle | 356 mm² |
+| Roof grille B, with slots (cover v0.32) | 7 slots 3.5 mm wide, 2 mm apart, inside the same circle | 667 mm² |
+| Roof grille A, above the heatsink | 37 circular holes in all three configurations | 356 mm² |
+| Number 21, two side walls | digit "2" 315 mm² and digit "1" 170 mm² on each wall | 970 mm² |
+| Front grille, inclined front wall | 16 slats 3.2 mm wide | 1258 mm² |
+| Vent path other than grille B | A + 21 + front | 2584 mm² |
 
-Left out on purpose, so that the result is on the safe side: the five connector openings of the rear wall (1978 mm2 in the sheet, largely filled by connectors and plugs), the holes of the accessory row, the screw and cable holes, and every gap between cover and deck. Counting 400 mm2 of free area at the rear wall changes the flow by less than 1 %, because grille B governs.
+Excluded from the airflow calculation: the five connector openings of the rear wall (1978 mm² in the sheet, largely filled by connectors and plugs), the holes of the accessory row, the screw and cable holes, and every gap between cover and deck. Counting 400 mm² of free area at the rear wall changes the flow by less than 1% under the same loss assumptions, since most of the pressure drop is at grille B.
 
-The sheet is 2 mm thick; the cover has 0.0526 m2 of surface (body volume 105.13 cm3 divided by the thickness).
+The sheet is 2 mm thick; the cover has 0.0526 m² of surface (body volume 105.13 cm³ divided by the thickness).
 
 ### 3.4 Air
 
-Dry air at 30 deg C and 101325 Pa: density 1.164 kg/m3 from the ideal gas law, specific heat 1007 J/(kg K).
+Dry air at 30 °C and 101325 Pa: density 1.164 kg/m³ from the ideal gas law, specific heat 1007 J/(kg K).
 
 ## 4. Method
 
 ### 4.1 Energy balance
 
-All the heat released in the bay leaves with the air that the fan moves, plus what crosses the sheet metal:
+In the shade calculation, heat leaves with the outgoing air and through the sheet metal:
 
     P = (rho * cp * Q + U * A_wall) * (T_bay - T_out)
 
-The bay is taken as well mixed (the heatsink fan of the board stirs it), so the temperature of the air that leaves is the temperature of the air around the board.
+The model treats the bay as well mixed. It represents the air around the board by a single temperature and cannot resolve local hot spots.
 
 ### 4.2 Air flow: fan against vent path
 
-The flow is where the pressure the fan can give equals the pressure the path asks for. The path is two restrictions in series: grille B, which all the air crosses together with the fan, and the other openings in parallel. Each is treated as an orifice:
+The operating flow is where the fan pressure equals the vent path loss. The model puts two restrictions in series: grille B and the combined area of the intake openings in parallel. Each restriction is treated as an orifice:
 
     dp = (rho / 2) * (Q / (Cd * A))^2
 
-Two descriptions of grille B bracket the answer:
+Both grille geometries use Cd = 0.61, a sharp-edged orifice approximation [1]. This keeps the loss assumption the same when comparing the two free areas; the model does not resolve the detailed flow through each hole or slot.
 
-- conservative: sharp-edged orifice, Cd = 0.61, for every opening;
-- expected, for the holes only: perforated-plate correlation of Idelchik for a thin plate, zeta = (0.707 (1 - f)^0.375 + 1 - f)^2 / f^2 on the approach velocity, with f = 356 / 1134 = 0.314 the free-area ratio over the 38 mm bore; it gives zeta = 17.2, equal to Cd = 0.77 on the free area. The plate is thicker than "thin" (t/d = 0.57), which lowers the loss further.
-
-Two descriptions of the fan bracket it as well, since only the end points are published:
-
-- straight line between 19.1 Pa at zero flow and 8.9 m3/h at zero pressure;
-- pessimistic: dp = dp_max (1 - Q/Q_max)^2, which lies below the line everywhere.
+The fan model uses two curves through the catalogue end points. The base curve is a straight line from 19.1 Pa at zero airflow to 8.9 m³/h at zero pressure. The sensitivity case uses a lower curve, dp = dp_max (1 - Q/Q_max)^2. Neither is a measured curve for this installation. For the thermal sensitivity case, the cooling contribution of the cover is also omitted.
 
 ### 4.3 Heat through the sheet metal
 
-Inside: forced convection of weak intensity, 5 W/(m2 K). Outside: natural convection 5 W/(m2 K) plus radiation of a painted surface (emissivity 0.9) at about 35 deg C, 4 eps sigma T^3 = 6.0 W/(m2 K). In series: U = 3.4 W/(m2 K), U * A_wall = 0.18 W/K. The conduction resistance of 2 mm of metal is negligible. This path is used only where stated.
+Inside: forced convection of weak intensity, 5 W/(m² K). Outside: natural convection 5 W/(m² K) plus radiation of a painted surface (emissivity 0.9) at about 35 °C, 4 eps sigma T^3 = 6.0 W/(m² K). In series: U = 3.4 W/(m² K), U * A_wall = 0.18 W/K. The conduction resistance of 2 mm of metal is negligible. This path is used only where stated.
 
 ### 4.4 Direct sun
 
-Full summer sun, 900 W/m2, on a black cover (absorptance 0.9) with 0.046 m2 of projected area: about 37 W absorbed. With 11 W/(m2 K) towards the outside and 5 W/(m2 K) towards the inside, about 30 % goes inwards: 12 W, taken with no wind. In the sun cases this heat is added to the heat of the board and the sheet-metal path of section 4.3 is set to zero.
+Full summer sun, 900 W/m², on a black cover (absorptance 0.9) with 0.046 m² of projected area: about 37 W absorbed. With 11 W/(m² K) towards the outside and 5 W/(m² K) towards the inside, about 30% goes inwards. The no-wind case uses 12 W, rounded up from that estimate. In the sun cases this heat is added to the heat of the board and the sheet-metal path of section 4.3 is set to zero.
 
 ### 4.5 No fan
 
-Without the fan the flow is the buoyancy draught through inlets (front grille and number 21) and outlets (the two roof grilles) in series, with a height difference of 20 mm between them: Q = Cd * A_eff * sqrt(2 g h dT / T), solved together with the energy balance.
+Without the fan the flow is the buoyancy draught through inlets (front grille and number 21) and outlets (the two roof grilles) in series, with a height difference of 20 mm between them:
 
-## 5. Three configurations, one after the other
+    A_eff = (1 / A_in^2 + 1 / A_out^2)^(-1/2)
+    Q = Cd * A_eff * sqrt(2 * g * h * dT / T)
 
-The design did not start with a fan and slots. It got there in three steps, and the numbers of each step are the reason for the next.
+Here dT is the bay temperature rise, T is the reference air temperature in kelvin, and h is the height difference. Solve Q and dT together with the energy balance.
 
-### 5.1 Configuration 1: vents only, no fan
+## 5. Configurations and results
 
-![Roof grille with 37 holes, no fan](img/BJ-STU-002/fig03_config1_vents_only_no_fan.png)
+### 5.1 Perforated cover without a bay fan
 
-*Figure 3. Roof grille B with 37 holes of 3.5 mm, nothing underneath. CAD view, own work.*
+![CAD view of the perforated roof grille without a bay fan](img/BJ-STU-002/fig03_config1_vents_only_no_fan.png)
 
-Two roof grilles with holes, the front grille and the number 21, and no bay fan: the air moves only because warm air is lighter. The openings are about 20 mm apart in height, so the draught is weak: 0.4 m3/h at 15 W. The bay air settles about 50 K above the outside air at 15 W and about 75 K at 25 W. The board stays inside its rating only below 11 deg C outside at average load, and not at all at full load. Passive vents are not enough: the bay needs a fan.
+*Figure 1. Original cover with 37 holes at grille B and no bay fan. CAD view.*
 
-### 5.2 Configuration 2: a fan under the holes
+The height difference between the inlet and outlet openings is only about 20 mm. At 15 W the buoyancy model gives 0.4 m³/h, raising the bay air about 50 K above ambient even in shade. The predicted rise is about 75 K at 25 W. This was enough to rule out passive ventilation for the perforated cover.
 
-![Fan under the grille with holes](img/BJ-STU-002/fig04_config2_fan_under_holes.png)
+### 5.2 Fan under the perforated grille
 
-*Figure 4. The 40 mm fan under grille B with holes; the cover is shown translucent. CAD view, own work.*
+![CAD view of the bay fan under the perforated roof grille](img/BJ-STU-002/fig04_config2_fan_under_holes.png)
 
-With the fan under the same grille the flow rises about nine times, to 3.5 m3/h (3.0 with the pessimistic fan curve). At 15 W the bay air is 11.5 K above the outside air, at 25 W 19.1 K. In shade this is sufficient: 25 W held continuously up to 41 deg C outside.
+*Figure 2. The 40 mm fan added below the original grille. CAD view.*
 
-The same figures show where the limit is. The 37 holes leave 356 mm2 free, 31 % of the bore of the fan, and the fan delivers only 40 % of its free flow: the grille, not the fan, sets the flow. In direct sun, where the black cover brings about 12 W more into the bay, the margin at full load goes down to 27 deg C outside.
+The next calculation kept all the openings and added the bay fan. At the estimated 3.5 m³/h, the model reaches the 60 °C bay limit at 41 °C outside in shade at 25 W. With the same load and the direct-sun assumptions from section 4.4, it reaches that limit at 27 °C outside. The holes leave only 356 mm² open above the fan, about 31% of its 38 mm opening. Increasing that area gave a way to improve airflow while retaining the fan and its mount.
 
-### 5.3 Configuration 3: the fan under slots
+### 5.3 Fan under seven slots
 
-![Fan under the grille with slots](img/BJ-STU-002/fig05_config3_fan_under_slots.png)
+![CAD view of the same bay fan under seven slots](img/BJ-STU-002/fig05_config3_fan_under_slots.png)
 
-*Figure 5. The same fan under seven slots; the cover is shown translucent. CAD view, own work.*
+*Figure 3. Seven slots above the same fan, with the original mounting pattern. CAD view.*
 
-The holes become seven slots 3.5 mm wide with 2 mm of sheet between them, inside the same 38 mm circle and parallel to the slats of the front grille. The free area goes from 356 to 667 mm2 (59 % of the bore) with the same fan and the same screw pattern. The flow rises to 5.2 m3/h (4.3 with the pessimistic curve). At 25 W the bay air is 13.3 K above the outside air.
+Seven 3.5 mm slots with 2 mm of sheet between them increase the free area from 356 to 667 mm². Under the same assumptions for the fan and vent losses, airflow rises from 3.5 to 5.2 m³/h. With the lower fan curve it rises from 3.0 to 4.2 m³/h.
 
-![Fan and vent curves](img/BJ-STU-002/fig01_fan_and_vent_curves.png)
+![Pressure and airflow plot showing the operating points with holes and slots](img/BJ-STU-002/fig01_fan_and_vent_curves.png)
 
-*Figure 1. Fan curves and vent-path curves for holes and for slots; the dots are the operating points in m3/h. Own work.*
+*Figure 4. Where each fan curve crosses the corresponding vent-path curve, the pressure the fan supplies equals the pressure lost through the openings. Filled markers are the base estimates; open markers use the lower fan curve.*
 
-### 5.4 Admissible outside temperature, in shade and in direct sun
+### 5.4 Outside temperature at the 60 °C bay limit
 
-Outside temperature at which the air around the board reaches its 60 deg C rating. Base case first; in brackets the same with the pessimistic fan curve and no help from the sheet metal.
-
-| Configuration | Air flow | 15 W, shade | 15 W, direct sun | 25 W, shade | 25 W, direct sun |
-|---|---|---|---|---|---|
-| 1. Vents only, no fan | 0.4 m3/h | 11 deg C | outside the rating | outside the rating | outside the rating |
-| 2. Fan under 37 holes | 3.5 m3/h | 49 deg C (44) | 36 deg C (32) | 41 deg C (34) | 27 deg C (22) |
-| 3. Fan under 7 slots | 5.2 m3/h | 52 deg C (49) | 44 deg C (40) | 47 deg C (42) | 38 deg C (33) |
-
-15 W is the average of a real workload; 25 W is the worst case stated by Arduino for the board, taken as continuous. "Direct sun" is full summer sun on the black cover with no wind: about 12 W more in the bay, and no heat leaving through the sheet metal (section 4.4).
-
-Temperature of the bay air above the outside air, base case:
+The table gives the calculated outside temperature at which the bay air reaches 60 °C. Values are rounded to whole degrees. Parentheses give the result for the lower fan curve with no heat loss credited to the cover. The direct-sun cases already omit heat loss through the cover and add 12 W of solar heat.
 
 | Configuration | 15 W, shade | 15 W, direct sun | 25 W, shade | 25 W, direct sun |
-|---|---|---|---|---|
-| 1. Vents only, no fan | 50 K | above 100 K | 75 K | above 100 K |
-| 2. Fan under 37 holes | 11.5 K | 23.9 K | 19.1 K | 32.8 K |
-| 3. Fan under 7 slots | 8.0 K | 15.9 K | 13.3 K | 21.7 K |
+|---|---:|---:|---:|---:|
+| Holes only | 11 °C | Below 0 °C | Below 0 °C | Below 0 °C |
+| Fan + 37 holes | 49 °C (44) | 36 °C (32) | 41 °C (34) | 27 °C (22) |
+| Fan + 7 slots | 52 °C (49) | 44 °C (40) | 47 °C (42) | 38 °C (33) |
 
-![Allowed outside temperature](img/BJ-STU-002/fig02_allowed_ambient.png)
+The passive results below 0 °C indicate that the model finds no margin at non-freezing ambient temperatures for those cases. The model uses air properties at 30 °C, so the extrapolated cold thresholds are not used as operating limits.
 
-*Figure 2. Outside temperature at which the bay air reaches 60 deg C, against the heat released by the board, for the three configurations. Dashed: direct sun. Own work.*
+![Calculated ambient limits at 25 W. In direct sun, the base estimates move from 27 °C with holes and fan to 38 °C with slots and fan](img/BJ-STU-002/fig02_allowed_ambient.png)
 
-## 6. Why the fan, and why the slots
+*Figure 5. The same 25 W load in shade and in direct sun. The two markers per fan configuration are the results of two model assumptions, not a confidence interval.*
 
-1. **The fan is there because the numbers ask for it.** Without it the bay air runs 50 K above the outside air at average load (configuration 1). With it, 8 to 12 K.
-2. **The slots are there because the grille was the restriction, not the fan.** Opening the grille from 31 % to 59 % raises the flow by half with the same fan, the same noise and the same power, and costs only laser path.
-3. **The slots are what makes the rover usable in the sun.** At full load the admissible outside temperature in direct sun goes from 27 to 38 deg C; at average load from 36 to 44 deg C.
-4. **The other openings are not the restriction.** The front grille, the number 21 and the second roof grille together offer almost four times the free area of the slots: they are where the fresh air comes in, low and at the front.
-5. **Design rules that follow.** The bay fan extracts, and runs whenever the board is powered.
+## 6. Selected cover
 
-## 7. Assumptions
+The BJ-P02 cover uses seven slots at grille B with the 40 mm fan set to exhaust. At 25 W in the direct-sun case, the slots raise the estimated outside temperature limit by about 11 °C under either fan assumption. Grille A above the heatsink stays perforated. It provides a path for incoming air along with the front grille and the **21** cutouts. The bay fan is intended to run whenever the board is powered. Records: D-093 (grille geometry) and D-094 (fan direction).
 
-- Steady state, bay air well mixed, outside air at 30 deg C for the properties, sea-level pressure.
-- Direct sun: 900 W/m2, no wind, black finish; with wind or a lighter finish the sun cases improve.
-- Optional parts of the roof (lidar, turret) fitted on their own mounting pattern, clear of the two grilles (10 mm, RIL-043).
+## 7. Model limits
 
-## 8. Bench test plan
+The model assumes steady heat input, unobstructed vents and well-mixed air. The sun case represents a black cover at 900 W/m² with no wind. It does not describe changing sun angle, airflow around the moving rover or local temperatures under the roof. The fan curves and orifice losses are estimates. The actual airflow and temperature margin depend on the built enclosure and the heat released by the installed equipment.
 
-| Item | What is measured |
-|---|---|
-| Bay air temperature | thermocouple above the board, at 15 W and at full load, fan on |
-| Air flow | anemometer on grille B, compared with section 5.3 |
-| SoM temperature | on-board sensor, against the throttling threshold |
-| Fan speed control | PWM against bay temperature |
+## 8. Hardware verification
 
-## 9. Reproduce it
+Start in shade with the assembled cover, and log outside air temperature, air temperature near the board heatsink inlet, sustained electrical load, SoM temperature and fan tachometer speed. Hold a representative workload and then a sustained load near the 25 W design case until temperatures settle. Compare the measured rise above ambient with the model at the recorded load. For the slotted cover in shade, the base calculation gives a rise of 8.0 K at 15 W and 13.3 K at 25 W. For airflow, take readings across grille B or use a flow fixture; a single velocity reading in a slot does not give the total flow.
 
-The calculation is a short Python script: energy balance, two orifices in series, bisection on the fan curve. Inputs are the ones of section 3.
+Repeat under direct sun with the same cover finish and record irradiance, orientation and wind so the run can be compared with the modeled case. For the conditions claimed, the inlet air must stay below 60 °C and the SoM must complete the workload without thermal throttling. Record the test conditions with the result.
+
+## 9. Calculation
+
+To reproduce the comparison, calculate the vent-path pressure drop from the areas in section 3.3 and intersect it with each fan curve by bisection. Use the resulting airflow in the energy balance for shade and for the additional 12 W sun load. For the passive case, solve the buoyancy flow and energy balance together.

@@ -32,18 +32,16 @@ The candidate concentrates both loads at P3. Its suitability depends on the inst
 
 ## Cooling by design
 
-**The choice.** A 40 mm fan exchanges the air of the bay; a grille on the roof sits above the heatsink of the board and a slotted vent above the fan; the number 21 is cut through both side walls.
+The board has its own heatsink and fan. The enclosure has to replace the warm air around that heatsink with outside air. The first calculation used the perforated cover alone: at 15 W and in shade, buoyancy through the openings left the bay air about 50 K above ambient. Adding a 40 mm bay fan reduced that rise to about 11 K, but the direct-sun case at 25 W left little room for a hot day. In that case the model reached the 60 °C bay limit at 27 °C outside.
 
-**Why.** The board has its own heatsink and fan: what an enclosure must not do is trap the warm air around them. The bay fan is therefore there for air exchange, not to blow on the board. The side grilles of the first concepts were replaced by the cut-through 21, which keeps an air path in the side walls and gives the rover its face.
+Replacing the 37 holes immediately above the fan with seven slots increased the free area from 356 to 667 mm² without changing the fan or its mount. The base calculation gives 5.2 m³/h through the slotted cover, up from 3.5 m³/h. At 25 W in direct sun, it puts the outside temperature at the bay limit at 38 °C (33 °C using the lower fan curve). That gain justified changing the grille. The temperature margin and the absence of throttling still need to be checked on the built rover.
 
 | Roof ventilation | Side-panel opening |
 | --- | --- |
 | ![CAD view of the slotted roof vent above the bay fan in the BJ-P02 cover](images/blackjack_cooling_roof_slots.png) | ![Render of the 21 cutout in the BJ-P02 side panel](images/blackjack_render_detail_21.jpg) |
-| The slotted vent above the bay fan exchanges air through the roof. | The cutout lets air pass through the side panel. |
+| The 40 mm bay fan exhausts through seven roof slots. | The side cutout is one of the air inlets. |
 
-**Proof.** [Bay ventilation study BJ-STU-002](../studies/BJ-STU-002_bay_ventilation_study.md) compares three configurations. Vents only: the bay air runs 50 K above the outside air at average load. Fan under a grille with holes: 3.5 m3/h, sufficient in shade. Fan under seven slots, the design: 5.2 m3/h, which keeps the air around the board below its 60 deg C rating up to 47 deg C outside at the worst-case power of the board (25 W continuous), and up to 38 deg C in direct summer sun.
-
-**Record.** Purpose of the bay fan: D-011. Exhaust on one side and intake on the other: D-022. Number 21 in place of the side grilles, two roof grilles: D-063. All 12 November 2026.
+The fan exhausts through the slotted roof vent. Air can enter through the separate perforated grille above the heatsink, the front grille and the **21** cutouts. Decisions D-093 and D-094 record the grille change and fan direction. [Ventilation study and hardware test plan](../studies/BJ-STU-002_bay_ventilation_study.md).
 
 ## Room to grow
 

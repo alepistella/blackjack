@@ -32,12 +32,12 @@ The adapter uses mounting points already present in the UGV02 deck. Their positi
 
 The enclosure is developed from a single 2 mm sheet with nine bends and a flat blank of 285.2 × 241.1 mm. A single blank avoids welded joints and keeps fabrication to laser cutting and press brake operations. That production route constrains the geometry. The openings must lie in the plane of the blank, the unfolded panels must fit without overlap, and adjacent panels must clear one another at bends. [Sheet-metal design rationale](docs/DESIGN_RATIONALE.md#one-sheet-no-welds).
 
-The board has its own heatsink and fan, and the enclosure needs a path for that heat to leave the bay. A dedicated 40 mm fan exchanges air with the outside through roof grilles and the **21** cut into the side panels. The [bay ventilation study](studies/BJ-STU-002_bay_ventilation_study.md) puts numbers on it, in three steps: vents alone leave the bay 50 K above the outside air; the fan under a perforated grille is sufficient in shade; the fan under slots, the final design, moves 5.2 m3/h and keeps the air around the board inside its 60 degree C rating up to 47 degrees C outside at full load, 38 in direct summer sun. [Cooling layout](docs/DESIGN_RATIONALE.md#cooling-by-design).
+I first checked whether the perforated cover could cool the board without a bay fan. The model predicted a rise of about 50 °C above ambient at 15 W, even in shade. Adding a fan under the same grille was enough in shade. At 25 W in direct sun, the model put the bay at its 60 °C limit at 27 °C outside. I kept the fan and replaced the holes above it with seven slots. That raised the calculated threshold in the same sun case to 38 °C. The [ventilation study](studies/BJ-STU-002_bay_ventilation_study.md) shows the three layouts, the assumptions and the tests planned for the assembled rover.
 
 | Roof ventilation | Side-panel opening |
 | --- | --- |
 | ![CAD view of the slotted roof vent above the bay fan in the BJ-P02 cover](docs/images/blackjack_cooling_roof_slots.png) | ![Render of the 21 cutout in the BJ-P02 side panel](docs/images/blackjack_render_detail_21.jpg) |
-| The slotted vent above the bay fan exchanges air through the roof. | The cutout lets air pass through the side panel. |
+| The 40 mm bay fan exhausts through seven roof slots. | The side cutout is one of the air inlets. |
 
 A common mounting centre lets a turret and a lidar share one roof layout as alternatives. CAD already includes the **BJ-P03 rear plate** and its ground-plane provision for the GNSS antenna, and the **LTE antenna opening in the BJ-P02 cover**. Building in those interfaces now lets positioning and connectivity be commissioned after the base works using the same deck and enclosure. [Accessory interfaces](docs/DESIGN_RATIONALE.md#room-to-grow).
 
