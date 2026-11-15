@@ -38,8 +38,8 @@ The candidate concentrates both loads at P3. Its suitability depends on the inst
 
 | Roof ventilation | Side-panel opening |
 | --- | --- |
-| ![CAD view of the perforated roof grille in the BJ-P02 cover](images/blackjack_cooling_roof.png) | ![Render of the 21 cutout in the BJ-P02 side panel](images/blackjack_render_detail_21.jpg) |
-| The perforations provide a path for air exchange through the roof. | The cutout lets air pass through the side panel. |
+| ![CAD view of the slotted roof vent above the bay fan in the BJ-P02 cover](images/blackjack_cooling_roof_slots.png) | ![Render of the 21 cutout in the BJ-P02 side panel](images/blackjack_render_detail_21.jpg) |
+| The slotted vent above the bay fan exchanges air through the roof. | The cutout lets air pass through the side panel. |
 
 **Proof.** [Bay ventilation study BJ-STU-002](../studies/BJ-STU-002_bay_ventilation_study.md) compares three configurations. Vents only: the bay air runs 50 K above the outside air at average load. Fan under a grille with holes: 3.5 m3/h, sufficient in shade. Fan under seven slots, the design: 5.2 m3/h, which keeps the air around the board below its 60 deg C rating up to 47 deg C outside at the worst-case power of the board (25 W continuous), and up to 38 deg C in direct summer sun.
 
