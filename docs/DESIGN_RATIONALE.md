@@ -32,9 +32,9 @@ The candidate concentrates both loads at P3. Its suitability depends on the inst
 
 ## Cooling by design
 
-The board has its own heatsink and fan. The enclosure has to replace the warm air around that heatsink with outside air. The first calculation used the perforated cover alone: at 15 W and in shade, buoyancy through the openings left the bay air about 50 K above ambient. Adding a 40 mm bay fan reduced that rise to about 11 K, but the direct-sun case at 25 W left little room for a hot day. In that case the model reached the 60 °C bay limit at 27 °C outside.
+The board has its own heatsink and fan. The enclosure has to replace the warm air around that heatsink with outside air. The first calculation used the perforated cover alone: at 15 W and in shade, buoyancy through the openings left the bay air about 50 K above ambient. Adding a 40 mm bay fan reduced that rise to about 16 K in the conservative calculation. In direct sun at 25 W, the same model reached the 60 °C bay limit at 22 °C outside.
 
-Replacing the 37 holes immediately above the fan with seven slots increased the free area from 356 to 667 mm² without changing the fan or its mount. The base calculation gives 5.2 m³/h through the slotted cover, up from 3.5 m³/h. At 25 W in direct sun, it puts the outside temperature at the bay limit at 38 °C (33 °C using the lower fan curve). That gain justified changing the grille. The temperature margin and the absence of throttling still need to be checked on the built rover.
+Replacing the 37 holes immediately above the fan with seven slots increased the free area from 356 to 667 mm² without changing the fan or its mount. With the lower fan curve, calculated airflow rises from 3.0 to 4.2 m³/h. At 25 W in direct sun, that increases the estimated outside temperature limit to 33 °C. That gain justified changing the grille. The temperature margin and the absence of throttling still need to be checked on the built rover.
 
 | Roof ventilation | Side-panel opening |
 | --- | --- |
