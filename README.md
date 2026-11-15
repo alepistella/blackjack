@@ -8,7 +8,7 @@ The Qualcomm Dragonwing IQ8 (QCS8275) brings Linux and a dedicated neural proces
 
 The current design work covers mechanical packaging, the target ROS 2 architecture and a schematic-based power study. The UGV02 provides a drivetrain, motor controller and battery module, with manufacturer CAD for the mounting interface. Reusing that base focuses the initial integration on mounting the board, powering it from the rover battery and connecting ROS 2 to the motor controller. [Mounting rationale](docs/DESIGN_RATIONALE.md#nothing-drilled-in-the-chassis).
 
-[System architecture](#system-architecture) · [Design rationale](docs/DESIGN_RATIONALE.md) · [Power supply study](studies/BJ-STU-001_power_supply_study.md) · [Build roadmap](ROADMAP.md)
+[Weekly engineering notebook](https://alepistella.github.io/blackjack/) · [System architecture](#system-architecture) · [Design rationale](docs/DESIGN_RATIONALE.md) · [Power supply study](studies/BJ-STU-001_power_supply_study.md) · [Build roadmap](ROADMAP.md)
 
 ![CAD-based render of Blackjack Rover on the UGV02 chassis with the optional roof turret](docs/images/blackjack_render_assembled.jpg)
 

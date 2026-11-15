@@ -23,3 +23,29 @@ path = ["src/**", "firmware/**", "scripts/**"]
 precedence = "closest"
 SPDX-FileCopyrightText = "2026 Alessandro Pistella"
 SPDX-License-Identifier = "Apache-2.0"
+
+# Website implementation, adopted from AP editorial kit 1.0
+[[annotations]]
+path = ["site/*.py", "site/figures/*.py", "site/assets/*.css", "site/assets/*.js", "site/templates/*.html", ".github/workflows/*.yml"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Alessandro Pistella"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ["site/*.md", "site/figures/*.md", "site/*.json", "site/assets/data/**", "site/content/**", "site/assets/images/*.svg"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Alessandro Pistella"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["site/assets/images/blackjack*.jpg", "site/assets/images/blackjack*.png", "site/assets/images/dum-e-ventuno-packaging.png", "site/assets/video/*"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Alessandro Pistella"
+SPDX-License-Identifier = "LicenseRef-Blackjack-AllRightsReserved"
+
+# Study figures and the trial drawing retain their documentation terms.
+[[annotations]]
+path = ["site/assets/images/fig*.png", "site/assets/images/rear-plate-flat-trial.png"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Alessandro Pistella"
+SPDX-License-Identifier = "CC-BY-4.0"
