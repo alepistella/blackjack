@@ -48,6 +48,8 @@ with tempfile.TemporaryDirectory(prefix='blackjack-site-check-') as tmp:
     home_notes=home[home.index('id="latest"'):]
     assert home_notes.index('blog/03-the-decisions-under-the-skin/') < home_notes.index('blog/02-inside-blackjack/') < home_notes.index('blog/01-a-bigger-question/')
     assert 'id="software-route"' in home and 'Qualcomm AI Hub' in home
+    assert home.count('class="architecture-step"')==4
+    assert 'Diagram revision 02' in home and 'Evidence feeds the next decision.' in home
     stack_article=(root / 'dist/blog/02-inside-blackjack/index.html').read_text()
     assert 'A finding that earns its own session' in stack_article
     assert 'YOLOX-Small' in stack_article and 'QIR SDK 2.6.1' in stack_article

@@ -11,3 +11,7 @@ The timeline, milestones, dates and graphical layouts are preserved. The design 
 Validation is recorded in the local publication receipt: production build, link/metadata checks, publishing smoke suite, thermal reference tests and responsive browser inspection. This review is not a product certification or an endorsement by a platform manufacturer.
 
 Visual evidence: two unmodified Arduino documentation interface images are attributed under CC BY-SA 4.0 and identified as documentation examples using UNO Q, not local VENTUNO Q runs. A genuine GitHub source-view screenshot pins the QRB README at revision 000e897, lines 99-110. Its caption distinguishes absence from the support table from evidence of incompatibility. The upstream source notice accompanies the capture.
+
+## Visible diagram revision 02 / 16 November 2026
+
+The home architecture diagram now uses four numbered responsibilities, code-native line icons, a connected horizontal/vertical path, readable stage titles, linked stack details and an explicit feedback route. Text remains semantic HTML and crawlable. The diagram displays its revision and date. This is a normal follow-up commit; no further history rewrite is requested for this visual revision.

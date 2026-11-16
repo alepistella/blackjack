@@ -1,0 +1,32 @@
+/* Revision 02: semantic HTML architecture map, horizontal to vertical. */
+.software-route{border-bottom:1px solid var(--line)}
+.software-route>p{max-width:78ch}
+.architecture-map{margin:32px 0;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.architecture-caption{display:flex;justify-content:space-between;align-items:start;gap:24px;margin:0 0 32px}
+.architecture-caption .kicker{display:block;color:var(--accent);margin-bottom:8px}
+.architecture-caption strong{font:400 28px/1.2 var(--font-display);color:var(--text)}
+.architecture-revision{font:10px/1.8 var(--font-mono);text-align:right;white-space:nowrap;color:var(--muted)}
+.architecture-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;list-style:none;margin:0;padding:0}
+.architecture-step{position:relative;min-width:0}
+.architecture-node{position:relative;display:flex;align-items:center;justify-content:center;width:64px;height:64px;margin-bottom:20px;border:1px solid var(--line);border-radius:50%;background:var(--code-bg);color:var(--link);z-index:1}
+.architecture-node svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.architecture-step:first-child .architecture-node{color:var(--accent);border-color:var(--accent)}
+.architecture-step:last-child .architecture-node{color:var(--signal);border-color:var(--signal)}
+.architecture-index{position:absolute;right:-7px;bottom:-3px;background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:2px 5px;font:10px/1.4 var(--font-mono);color:var(--text)}
+.architecture-step:not(:last-child):after{content:'';position:absolute;top:32px;left:76px;right:-14px;height:1px;background:var(--line)}
+.architecture-step:not(:last-child):before{content:'';position:absolute;top:29px;right:-14px;width:6px;height:6px;border-top:1px solid var(--accent);border-right:1px solid var(--accent);transform:rotate(45deg)}
+.architecture-domain{display:block;font:10px/1.5 var(--font-mono);letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.architecture-step h3{font:400 25px/1.2 var(--font-display);margin:8px 0 10px}
+.architecture-step h3 a{display:block;min-height:44px;text-decoration:none;color:var(--text)}
+.architecture-step h3 a:hover{color:var(--accent)}
+.architecture-step p{font-size:14px;line-height:1.65;color:var(--muted);margin:0 0 16px}
+.architecture-tools{display:block;font:11px/1.8 var(--font-mono);color:var(--link);border-top:1px solid var(--line);padding-top:12px}
+.architecture-feedback{display:flex;align-items:center;gap:16px;border-top:1px solid var(--line);margin-top:28px;padding-top:20px}
+.architecture-return{font:36px/1 var(--font-display);color:var(--accent)}
+.architecture-feedback p{font-size:13px;line-height:1.6;margin:0;flex:1}
+.architecture-feedback strong,.architecture-feedback p span{display:block}
+.architecture-feedback p span{color:var(--muted);font-size:12px;margin-top:3px}
+.architecture-feedback>a{font-size:12px;min-height:44px;display:flex;align-items:center;gap:10px}
+@media(min-width:601px) and (max-width:1000px){.architecture-flow{grid-template-columns:1fr 1fr;gap:30px}.architecture-step:nth-child(2):before,.architecture-step:nth-child(2):after{display:none}.architecture-caption strong{font-size:26px}}
+@media(max-width:600px){.architecture-map{padding:22px 18px}.architecture-caption{display:block;margin-bottom:28px}.architecture-caption strong{font-size:25px}.architecture-revision{display:block;text-align:left;margin-top:12px}.architecture-flow{grid-template-columns:1fr;gap:28px}.architecture-step{display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:18px}.architecture-node{grid-column:1;grid-row:1/span 4;margin:0}.architecture-step>*:not(.architecture-node){grid-column:2}.architecture-step h3{font-size:24px;margin-top:6px}.architecture-step h3 a{min-height:44px;padding-bottom:8px}.architecture-step p{font-size:13px;margin-bottom:12px}.architecture-step:not(:last-child):after{top:76px;bottom:-16px;left:31px;right:auto;width:1px;height:auto}.architecture-step:not(:last-child):before{top:auto;bottom:-16px;left:28px;right:auto;transform:rotate(135deg)}.architecture-tools{font-size:11px}.architecture-feedback{display:grid;grid-template-columns:26px 1fr;gap:10px}.architecture-feedback>a{grid-column:2}.architecture-feedback p{font-size:13px}.architecture-return{align-self:start}.architecture-feedback p span{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.architecture-map *{scroll-behavior:auto}}
